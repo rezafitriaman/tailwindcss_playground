@@ -1,4 +1,5 @@
 @import "./common";
+@import "./tailwindcss";
 @import "~normalize-scss/sass/normalize";
 
 .header {
@@ -9,5 +10,5 @@
   width: 150px; 
   height: 150px;
   padding-top: 80px;
-  fill: red; 
+  margin: 0 auto;
 }

@@ -15,5 +15,5 @@ module.exports = {
     "commonjs": true,
     "es6": true
   },
-  "ignorePatterns": ["src/banners/mainBanner/icons/*"]
+  "ignorePatterns": []
 };

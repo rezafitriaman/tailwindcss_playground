@@ -1,32 +1,37 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+//const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = (env) => {
   // Use env.<YOUR VARIABLE> here:
-  console.log("NODE_ENV: ", env.NODE_ENV); // 'local'
-  console.log("Production: ", env.production); // true
+  console.log("NODE_ENV: ", env.NODE_ENV); // 'development | production'
+  console.log("Production: ", env.production); // false
 
   return {
     mode: "development",
     entry: {
-      index: "./src/index.ts",
-      //home: "./src/home.ts"
+      index: {
+        import: './src/index.ts',
+        dependOn: 'shared',
+      },
+      shared: './src/vendor.ts',
+    },
+    output: {
+      filename: "[name].bundle.js",
+      path: path.resolve(__dirname, "dist"),
+      publicPath: "/",
     },
     target: "web",
     devtool: "eval-source-map",
     watchOptions: {
-      ignored: /node_modules/,
+      ignored: './node_modules/',
       aggregateTimeout: 500, // delay before reloading
       poll: 1000 // enable polling since fsevents are not supported in docker
     },
-    //performance: {
-      //hints: 'warning'
-    //},
     devServer: {
       host: "0.0.0.0",
       disableHostCheck: true,
@@ -35,14 +40,14 @@ module.exports = (env) => {
       contentBase: path.join(__dirname, "dist"),
       hot: true,
       overlay: {
-        warnings: true,
+        warnings: false,
         errors: true
       }
     },
     plugins: [
       new ESLintPlugin({
         failOnError: true,
-        failOnWarning: true,
+        failOnWarning: false,
         emitWarning: true,
         //eslintPath: path.resolve(__dirname, ".eslintrc.json")
       }),
@@ -55,24 +60,13 @@ module.exports = (env) => {
       new HtmlWebpackPlugin({
         title: "development",
         template: "src/index.hbs",
-        //filename: `index.blade.php`,
       }),
-      /* new HtmlWebpackPlugin({
-        title: "development",
-        template: "src/home.hbs",
-        //filename: `index.blade.php`,
-      }), */
       new MiniCssExtractPlugin({
         filename: "[name].css",
         chunkFilename: "[id].css",
         ignoreOrder: false,
       }),
     ],
-    output: {
-      filename: "[name].bundle.js",
-      path: path.resolve(__dirname, "dist"),
-      publicPath: "/",
-    },
     module: {
       rules: [
         {
@@ -86,7 +80,7 @@ module.exports = (env) => {
             {
               loader: 'eslint-loader',
               options: {
-                  failOnError: false,
+                  failOnError: true,
                   failOnWarning: false,
                   emitWarning: true,
               },

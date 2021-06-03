@@ -9,12 +9,23 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = (env) => {
   // Use env.<YOUR VARIABLE> here:
-  console.log("NODE_ENV: ", env.NODE_ENV); // 'local'
+  console.log("NODE_ENV: ", env.NODE_ENV); // 'development | production'
   console.log("Production: ", env.production); // true
 
   return {
     mode: "production",
-    entry: "./src/index.ts",
+    entry: {
+      index: {
+        import: './src/index.ts',
+        dependOn: 'shared',
+      },
+      shared: './src/vendor.ts',
+    },
+    output: {
+      filename: "[name].[contenthash].bundle.js",
+      path: path.resolve(__dirname, "dist"),
+      publicPath: "/",
+    },
     target: "web",
     devtool: "source-map",
     performance: {
@@ -23,7 +34,7 @@ module.exports = (env) => {
     plugins: [
       new ESLintPlugin({
         failOnError: true,
-        failOnWarning: true,
+        failOnWarning: false,
         emitWarning: true,
       }),
       new CopyPlugin({
@@ -40,11 +51,6 @@ module.exports = (env) => {
         ignoreOrder: false,
       }),
     ],
-    output: {
-      filename: "[name].[contenthash].bundle.js",
-      path: path.resolve(__dirname, "dist"),
-      publicPath: "/",
-    },
     module: {
       rules: [
         {

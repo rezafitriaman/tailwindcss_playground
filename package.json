@@ -78,6 +78,6 @@
     "html-minifier-loader": "^1.4.1",
     "lodash": "^4.17.20",
     "php-loader": "^0.2.0",
-    "webpack-php-manifest": "0.0.8"
+    "postcss-cli": "^8.3.1"
   }
 }

@@ -19,7 +19,7 @@ module.exports = (env) => {
         import: './src/index.ts',
         dependOn: 'shared',
       },
-      shared: './src/vendor.ts',
+      shared: './src/tailwindcss.ts',
     },
     output: {
       filename: "[name].[contenthash].bundle.js",

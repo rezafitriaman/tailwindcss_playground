@@ -1,31 +1,113 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Shrine (MDC Web Example App)</title>
-  <link rel="shortcut icon" href="https://material.io/favicon.ico">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
-</head> 
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="shortcut icon" href="./img/favicon.ico" />
+    <link
+      rel="apple-touch-icon"
+      sizes="76x76"
+      href="./img/apple-icon.png"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <title>Landing tailwind</title>
+  </head>
+  <body class="text-gray-800 antialiased">
+  <div class="chat-notification">
+      <div class="chat-notification-logo-wrapper">
+          <img class="chat-notification-logo" src="https://www.pinclipart.com/picdir/middle/126-1262958_ahmad-ghozali-on-twitter-chit-chat-clip-art.png" alt="ChitChat Logo">
+      </div>
+      <div class="chat-notification-content">
+          <h4 class="chat-notification-title">ChitChat</h4>
+          <p class="chat-notification-message">You have a new message!</p>
+      </div>
+  </div>
 
-<body class="shrine-login">
-  <section class="header text-pink-800">
-    <svg class="shrine-logo fill-current" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-       width="48px" height="48px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve" fill="#000000" focusable="false">
-      <g>
-        <g>
-          <path d="M17,2H7L2,6.62L12,22L22,6.62L17,2z M16.5,3.58l3.16,2.92H16.5V3.58z M7.59,3.5H15v3H4.34L7.59,3.5z
-             M11.25,18.1L7.94,13h3.31V18.1z M11.25,11.5H6.96L4.69,8h6.56V11.5z M16.5,12.32 M12.75,18.09V8h6.56L12.75,18.09z"/>
-        </g>
-        <rect fill="none" width="24" height="24"/>
-      </g>
-    </svg>
-    <h1 class="text-pink-500">Hallo reza!</h1>
-  </section> 
+  <style>
+      .chat-notification {
+          display: flex;
+          max-width: 24rem;
+          margin: 0 auto;
+          padding: 1.5rem;
+          border-radius: 0.5rem;
+          background-color: #fff;
+          box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+      .chat-notification-logo-wrapper {
+          flex-shrink: 0;
+      }
+      .chat-notification-logo {
+          height: 3rem;
+          width: 3rem;
+      }
+      .chat-notification-content {
+          margin-left: 1.5rem;
+          padding-top: 0.25rem;
+      }
+      .chat-notification-title {
+          color: #1a202c;
+          font-size: 1.25rem;
+          line-height: 1.25;
+      }
+      .chat-notification-message {
+          color: #718096;
+          font-size: 1rem;
+          line-height: 1.5;
+      }
+  </style>
 
-  <form action="home.html">
-  </form>
+  <div class="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-lg flex items-center space-x-4 mt-11">
+      <div class="flex-shrink-0">
+          <img class="h-12 w-12" src="https://www.pinclipart.com/picdir/middle/126-1262958_ahmad-ghozali-on-twitter-chit-chat-clip-art.png" alt="ChitChat Logo">
+      </div>
+      <div>
+          <div class="text-xl font-medium text-black">ChitChat</div>
+          <p class="text-gray-500">You have a new message!</p>
+      </div>
+  </div>
 
+  <div class="py-8 px-8 max-w-sm mx-auto bg-white rounded-xl shadow-md space-y-2 sm:py-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-6 mt-11">
+      <img class="block mx-auto h-24 rounded-full sm:mx-0 sm:flex-shrink-0" src="data:image/jpeg;base64,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" alt="Woman's Face">
+      <div class="text-center space-y-2 sm:text-left">
+          <div class="space-y-0.5">
+              <p class="text-lg text-black font-semibold">
+                  Erin Lindford
+              </p>
+              <p class="text-gray-500 font-medium">
+                  Product Engineer
+              </p>
+          </div>
+          <button class="px-4 py-1 text-sm text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2">Message</button>
+      </div>
+  </div>
 
-</body>
+  <div class="flex flex-col items-center mt-11">
+      <!-- Using utilities -->
+      <button class="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-green-500 hover:bg-green-700">
+          Click me
+      </button>
+
+      <!-- Extracting classes using @apply -->
+      <button class="btn btn-green mt-6">
+          Button
+      </button>
+  </div>
+
+  <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl mt-11 test">
+      <div class="md:flex">
+          <div class="md:flex-shrink-0">
+              <img class="h-48 w-full object-cover md:h-full md:w-48" src="https://media-cdn.tripadvisor.com/media/photo-s/14/eb/b3/69/self-service-bar-order.jpg" alt="Man looking at item at a store">
+          </div>
+          <div class="p-8">
+              <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold">Case study</div>
+              <a href="#" class="text-red-500 block mt-1 text-lg leading-tight font-medium text-black hover:underline">Finding customers for your new business</a>
+              <p class="mt-2 text-hotpink-dark">Getting a new business off the ground is a lot of hard work. Here are five ideas you can use to find your first customers.</p>
+          </div>
+      </div>
+  </div>
+  </body>
 </html>

@@ -16,9 +16,9 @@ module.exports = (env) => {
     entry: {
       index: {
         import: './src/index.ts',
-        dependOn: 'shared',
+        dependOn: 'tailwindcss',
       },
-      shared: './src/vendor.ts',
+      tailwindcss: './src/tailwindcss.ts',
     },
     output: {
       filename: "[name].bundle.js",

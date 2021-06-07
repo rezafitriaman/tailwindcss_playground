@@ -1,1 +1,0 @@
-import './scss/vendor/vendor.scss';

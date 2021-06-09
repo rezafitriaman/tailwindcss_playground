@@ -1,9 +1,13 @@
+const plugin = require('tailwindcss/plugin')
+
 module.exports = {
-  purge: [
-    './src/**/*.hbs',
-    './src/**/*.ts',
-    './src/**/*.scss',
-  ],
+  purge: {
+    enabled: true,
+    content: [
+      './src/**/*.hbs',
+      './src/**/*.{js,jsx,ts,tsx,vue}',
+    ],
+  },
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
@@ -19,5 +23,31 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    plugin(function({ addBase, theme }) {
+      addBase({
+        'h1': { fontSize: theme('fontSize.2xl') },
+        'h2': { fontSize: theme('fontSize.xl') },
+        'h3': { fontSize: theme('fontSize.lg') },
+      })
+    }),
+    plugin(function({ addComponents, theme }) {
+      const buttons = {
+        '.btn': {
+          padding: `${theme('spacing.2')} ${theme('spacing.4')}`,
+          fontWeight: `${theme('fontWeight.semibold')}`,
+          boxShadow: `${theme('boxShadow.md')}`,
+        },
+        '.btn-pink': {
+          color: theme('colors.white'),
+          backgroundColor: theme('colors.pink.400'),
+          '&:hover': {
+            backgroundColor: theme('colors.hotpink.dark')
+          },
+        },
+      }
+
+      addComponents(buttons)
+    })
+  ],
 }

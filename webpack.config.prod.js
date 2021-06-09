@@ -17,9 +17,9 @@ module.exports = (env) => {
     entry: {
       index: {
         import: './src/index.ts',
-        dependOn: 'shared',
+        dependOn: 'tailwindcss',
       },
-      shared: './src/tailwindcss.ts',
+      tailwindcss: './src/app.js',
     },
     output: {
       filename: "[name].[contenthash].bundle.js",
@@ -30,6 +30,18 @@ module.exports = (env) => {
     devtool: "source-map",
     performance: {
       hints:"warning"
+    },
+    devServer: {
+      host: "0.0.0.0",
+      disableHostCheck: true,
+      port: 8081,
+      writeToDisk: true,
+      contentBase: path.join(__dirname, "dist"),
+      hot: true,
+      overlay: {
+        warnings: false,
+        errors: true
+      }
     },
     plugins: [
       new ESLintPlugin({
@@ -64,11 +76,35 @@ module.exports = (env) => {
             {
               loader: 'eslint-loader',
               options: {
-                  failOnError: false,
+                  failOnError: true,
                   failOnWarning: false,
                   emitWarning: true,
               },
           }],
+        },
+        {
+          test: /\.css$/i,
+          use: [
+            {
+              loader: MiniCssExtractPlugin.loader,
+            },
+            {
+              loader: "css-loader",
+              options: {
+                sourceMap: true,
+                importLoaders: 2,
+              },
+            },
+            {
+              loader: "postcss-loader",
+              options: {
+                sourceMap: true,
+                postcssOptions: {
+                  config: path.resolve(__dirname, "postcss.config.js"),
+                },
+              },
+            },
+          ],
         },
         {
           test: /\.s[ac]ss$/i,

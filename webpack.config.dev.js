@@ -18,7 +18,7 @@ module.exports = (env) => {
         import: './src/index.ts',
         dependOn: 'tailwindcss',
       },
-      tailwindcss: './src/tailwindcss.ts',
+      tailwindcss: './src/app.js',
     },
     output: {
       filename: "[name].bundle.js",
@@ -87,6 +87,30 @@ module.exports = (env) => {
           }],
         },
         {
+          test: /\.css$/i,
+          use: [
+            {
+              loader: MiniCssExtractPlugin.loader,
+            },
+            {
+              loader: "css-loader",
+              options: {
+                sourceMap: true,
+                importLoaders: 2,
+              },
+            },
+            {
+              loader: "postcss-loader",
+              options: {
+                sourceMap: true,
+                postcssOptions: {
+                  config: path.resolve(__dirname, "postcss.config.js"),
+                },
+              },
+            },
+          ],
+        },
+        {
           test: /\.s[ac]ss$/i,
           use: [
             {
@@ -118,7 +142,11 @@ module.exports = (env) => {
         },
         {
           test: /\.hbs$/,
-          loader: "handlebars-loader",
+          use: [
+            {
+              loader: "handlebars-loader",
+            },
+          ]
         },
         {
           test: /\.php$/,

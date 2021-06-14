@@ -39,7 +39,7 @@ module.exports = (env) => {
     devServer: {
       host: "0.0.0.0",
       disableHostCheck: true,
-      port: 8081,
+      port: 8082,
       writeToDisk: false,
       contentBase: path.join(__dirname, "dist"),
       hot: true,
@@ -112,7 +112,7 @@ module.exports = (env) => {
               options: {
                 sourceMap: true,
                 postcssOptions: {
-                  config: path.resolve(__dirname, "postcss.config.js"),
+                  config: path.resolve(__dirname, "postcss-tailwind.config.js"),
                 },
               },
             },

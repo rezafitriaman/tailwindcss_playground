@@ -3,9 +3,6 @@
 # docker build -t tailwindcss_playground:latest .
 
 # dev mode
-# docker run -it -v $(pwd):/app -p 8082:8082 tailwindcss_playground:latest & npm run dev
+# docker run -it -v $(pwd):/app -p 8082:8082 tailwindcss_playground:latest
 
-# or
-
-# prod mode
-# docker run -it -v $(pwd):/app -p 8082:8082 tailwindcss_playground:latest & npm run build
+# prod mode: on Dockerfile change CMD npm run dev to CMD npm run build

@@ -4,6 +4,7 @@ module.exports = {
   purge: {
     enabled: true,
     content: [
+      './src/**/*.html',
       './src/**/*.hbs',
       './src/**/*.{js,jsx,ts,tsx,vue}',
       './src/**/*.{css,scss}',
@@ -33,7 +34,7 @@ module.exports = {
         },
         'h2': { fontSize: theme('fontSize.xl') },
         'h3': { fontSize: theme('fontSize.lg') },
-        'ul': { color: theme('colors.red.400') },
+        'ul': { color: theme('colors.purple.400') },
       })
     }),
     plugin(function({ addComponents, theme }) {

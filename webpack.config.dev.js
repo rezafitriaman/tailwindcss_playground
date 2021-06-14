@@ -22,7 +22,7 @@ module.exports = (env) => {
         import: './src/index.ts',
         dependOn: 'tailwindcss',
       },
-      tailwindcss: './src/tailwindcss.ts',
+      tailwindcss: './src/app.js',
     },
     output: {
       filename: "[name].bundle.js",

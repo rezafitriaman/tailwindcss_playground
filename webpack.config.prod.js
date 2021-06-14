@@ -83,6 +83,30 @@ module.exports = (env) => {
           }],
         },
         {
+          test: /\.css$/,
+          use: [
+            {
+              loader: 'style-loader',
+            },
+            {
+              loader: "css-loader",
+              options: {
+                sourceMap: true,
+                importLoaders: 2,
+              },
+            },
+            {
+              loader: "postcss-loader",
+              options: {
+                sourceMap: true,
+                postcssOptions: {
+                  config: path.resolve(__dirname, "postcss.config.js"),
+                },
+              },
+            },
+          ]
+        },
+        {
           test: /\.s[ac]ss$/i,
           use: [
             {

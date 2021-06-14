@@ -6,19 +6,23 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
+const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+
+const smp = new SpeedMeasurePlugin();
+
 module.exports = (env) => {
   // Use env.<YOUR VARIABLE> here:
   console.log("NODE_ENV: ", env.NODE_ENV); // 'development | production'
   console.log("Production: ", env.production); // false
 
-  return {
+  return smp.wrap({
     mode: "development",
     entry: {
       index: {
         import: './src/index.ts',
         dependOn: 'tailwindcss',
       },
-      tailwindcss: './src/app.js',
+      tailwindcss: './src/tailwindcss.ts',
     },
     output: {
       filename: "[name].bundle.js",
@@ -29,14 +33,14 @@ module.exports = (env) => {
     devtool: "eval-source-map",
     watchOptions: {
       ignored: './node_modules/',
-      aggregateTimeout: 500, // delay before reloading
+      aggregateTimeout: 200, // delay before reloading
       poll: 1000 // enable polling since fsevents are not supported in docker
     },
     devServer: {
       host: "0.0.0.0",
       disableHostCheck: true,
       port: 8081,
-      writeToDisk: true,
+      writeToDisk: false,
       contentBase: path.join(__dirname, "dist"),
       hot: true,
       overlay: {
@@ -67,12 +71,16 @@ module.exports = (env) => {
         ignoreOrder: false,
       }),
     ],
+    resolveLoader: {
+      modules: ['node_modules', path.resolve(__dirname, 'src/custom-loaders')]
+    },
     module: {
       rules: [
         {
           enforce: "pre",
           test: /\.(ts|js)x?$/,
           exclude: /node_modules/,
+          include: path.resolve(__dirname, 'src'),
           use: [
             {
               loader: "babel-loader",
@@ -87,10 +95,10 @@ module.exports = (env) => {
           }],
         },
         {
-          test: /\.css$/i,
+          test: /\.css$/,
           use: [
             {
-              loader: MiniCssExtractPlugin.loader,
+              loader: 'style-loader',
             },
             {
               loader: "css-loader",
@@ -108,13 +116,15 @@ module.exports = (env) => {
                 },
               },
             },
-          ],
+          ]
         },
         {
           test: /\.s[ac]ss$/i,
+          exclude: /node_modules/,
+          include: path.resolve(__dirname, 'src'),
           use: [
             {
-              loader: MiniCssExtractPlugin.loader,
+              loader: 'style-loader',
             },
             {
               loader: "css-loader",
@@ -142,6 +152,8 @@ module.exports = (env) => {
         },
         {
           test: /\.hbs$/,
+          exclude: /node_modules/,
+          include: path.resolve(__dirname, 'src'),
           use: [
             {
               loader: "handlebars-loader",
@@ -149,40 +161,19 @@ module.exports = (env) => {
           ]
         },
         {
-          test: /\.php$/,
-          use: [
-            {
-              loader: 'raw-loader',
-              options: {
-                esModule: false,
-              },
-            },
-          ],
-        },
-        {
-          test: /\.(png|jpg|jpeg|gif)$/i,
-          type: "asset/resource",
-        },
-        {
           test: /\.svg/,
+          exclude: /node_modules/,
+          include: path.resolve(__dirname, 'src'),
           type: "asset/inline",
         },
         {
           test: /\.(woff|woff2|eot|ttf|otf)$/i,
           type: "asset/resource",
         },
-        {
-          test: /\.(csv|tsv)$/i,
-          use: ["csv-loader"],
-        },
-        {
-          test: /\.xml$/i,
-          use: ["xml-loader"],
-        },
       ],
     },
     resolve: {
       extensions: [".tsx", ".ts", ".js"],
     },
-  };
+  });
 };

@@ -2,4 +2,10 @@
 
 # docker build -t tailwindcss_playground:latest .
 
-# docker run -it -v $(pwd):/app -p 8081:8081 tailwindcss_playground:latest
+# dev mode
+# docker run -it -v $(pwd):/app -p 8082:8082 tailwindcss_playground:latest & npm run dev
+
+# or
+
+# prod mode
+# docker run -it -v $(pwd):/app -p 8082:8082 tailwindcss_playground:latest & npm run build

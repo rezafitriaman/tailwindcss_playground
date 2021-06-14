@@ -19,7 +19,7 @@ module.exports = (env) => {
         import: './src/index.ts',
         dependOn: 'tailwindcss',
       },
-      tailwindcss: './src/app.js',
+      tailwindcss: './src/tailwindcss.ts',
     },
     output: {
       filename: "[name].[contenthash].bundle.js",
@@ -83,30 +83,6 @@ module.exports = (env) => {
           }],
         },
         {
-          test: /\.css$/i,
-          use: [
-            {
-              loader: MiniCssExtractPlugin.loader,
-            },
-            {
-              loader: "css-loader",
-              options: {
-                sourceMap: true,
-                importLoaders: 2,
-              },
-            },
-            {
-              loader: "postcss-loader",
-              options: {
-                sourceMap: true,
-                postcssOptions: {
-                  config: path.resolve(__dirname, "postcss.config.js"),
-                },
-              },
-            },
-          ],
-        },
-        {
           test: /\.s[ac]ss$/i,
           use: [
             {
@@ -141,35 +117,12 @@ module.exports = (env) => {
           loader: "handlebars-loader",
         },
         {
-          test: /\.php$/,
-          use: [
-            {
-              loader: 'raw-loader',
-              options: {
-                esModule: false,
-              },
-            },
-          ],
-        },
-        {
           test: /\.(png|jpg|jpeg|gif)$/i,
           type: "asset/resource",
         },
         {
           test: /\.svg/,
           type: "asset/inline",
-        },
-        {
-          test: /\.(woff|woff2|eot|ttf|otf)$/i,
-          type: "asset/resource",
-        },
-        {
-          test: /\.(csv|tsv)$/i,
-          use: ["csv-loader"],
-        },
-        {
-          test: /\.xml$/i,
-          use: ["xml-loader"],
         },
       ],
     },

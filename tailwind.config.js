@@ -6,6 +6,7 @@ module.exports = {
     content: [
       './src/**/*.hbs',
       './src/**/*.{js,jsx,ts,tsx,vue}',
+      './src/**/*.{css,scss}',
     ],
   },
   darkMode: false, // or 'media' or 'class'
@@ -26,9 +27,13 @@ module.exports = {
   plugins: [
     plugin(function({ addBase, theme }) {
       addBase({
-        'h1': { fontSize: theme('fontSize.2xl') },
+        'h1': {
+          fontSize: theme('fontSize.2xl'),
+          color: theme('colors.red.400')
+        },
         'h2': { fontSize: theme('fontSize.xl') },
         'h3': { fontSize: theme('fontSize.lg') },
+        'ul': { color: theme('colors.red.400') },
       })
     }),
     plugin(function({ addComponents, theme }) {

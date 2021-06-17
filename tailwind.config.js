@@ -34,7 +34,7 @@ module.exports = {
         },
         'h2': { fontSize: theme('fontSize.xl') },
         'h3': { fontSize: theme('fontSize.lg') },
-        'ul': { color: theme('colors.yellow.400') },
+        'ul': { color: theme('colors.blue.400') },
       })
     }),
     plugin(function({ addComponents, theme }) {

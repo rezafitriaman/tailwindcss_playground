@@ -1,28 +1,25 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
-//const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-
-const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
-
-const smp = new SpeedMeasurePlugin();
+//const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+//const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+//const smp = new SpeedMeasurePlugin();
 
 module.exports = (env) => {
-  // Use env.<YOUR VARIABLE> here:
   console.log("NODE_ENV: ", env.NODE_ENV); // 'development | production'
   console.log("Production: ", env.production); // false
 
-  return smp.wrap({
+  return {
     mode: "development",
     entry: {
       index: {
         import: './src/index.ts',
         dependOn: 'tailwindcss',
       },
-      tailwindcss: './src/tailwind.js',
+      tailwindcss: './src/tailwindcss.ts',
     },
     output: {
       filename: "[name].bundle.js",
@@ -40,7 +37,7 @@ module.exports = (env) => {
       host: "0.0.0.0",
       disableHostCheck: true,
       port: 8082,
-      writeToDisk: false,
+      writeToDisk: true,
       contentBase: path.join(__dirname, "dist"),
       hot: true,
       overlay: {
@@ -98,7 +95,7 @@ module.exports = (env) => {
           test: /\.css$/,
           use: [
             {
-              loader: 'style-loader',
+              loader: MiniCssExtractPlugin.loader,
             },
             {
               loader: "css-loader",
@@ -124,7 +121,7 @@ module.exports = (env) => {
           include: path.resolve(__dirname, 'src'),
           use: [
             {
-              loader: 'style-loader',
+              loader: MiniCssExtractPlugin.loader,
             },
             {
               loader: "css-loader",
@@ -175,5 +172,5 @@ module.exports = (env) => {
     resolve: {
       extensions: [".tsx", ".ts", ".js"],
     },
-  });
+  };
 };

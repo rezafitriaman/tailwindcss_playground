@@ -1,0 +1,9 @@
+@layer components {
+    .icon {
+        @apply focus:outline-none w-10 h-10 flex items-center justify-center;
+
+        svg {
+            @apply text-white fill-current w-6 h-6;
+        }
+    }
+}

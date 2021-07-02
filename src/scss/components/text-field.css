@@ -1,0 +1,25 @@
+@layer components {
+    .text-field {
+        @apply bg-gray-200 h-12 relative rounded-t;
+
+        input {
+            @apply pl-5 pr-12 text-base h-full w-full border-b-2 outline-none bg-transparent transition-opacity duration-150 ease-out;
+        }
+
+        label {
+            @apply absolute left-4 right-auto top-1/2 pointer-events-none transform -translate-y-1/2 text-base transition-all duration-150 ease-in;
+
+            &.active {
+                transform: translateY(-115%) translateX(-15%) scale(0.65);
+            }
+        }
+
+        .suffix-icon {
+            @apply absolute left-auto right-4 top-1/2 pointer-events-none transform -translate-y-1/2;
+
+            svg {
+                @apply inline-block fill-current w-6 h-6;
+            }
+        }
+    }
+}

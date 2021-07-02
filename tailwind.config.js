@@ -21,6 +21,13 @@ module.exports = {
         },
       }
     },
+    fontFamily: {
+      sans: ['Roboto', 'sans-serif'],
+    },
+    container: {
+      center: true,
+      padding: '1rem',
+    },
   },
   variants: {
     extend: {},
@@ -34,11 +41,18 @@ module.exports = {
         },
         'h2': { fontSize: theme('fontSize.xl') },
         'h3': { fontSize: theme('fontSize.lg') },
-        'ul': { color: theme('colors.blue.400') },
       })
     }),
     plugin(function({ addComponents, theme }) {
-      const buttons = {
+      const basicStyle = {
+        /*'.header-brand': {
+          fontWeight: `${theme('fontWeight.bold')}`,
+          color: theme('colors.white'),
+          fontSize: theme('fontSize.xs'),
+          '@media (min-width: 768px)': {
+            fontSize: theme('fontSize.base'),
+          }
+        },*/
         '.btn': {
           padding: `${theme('spacing.2')} ${theme('spacing.4')}`,
           fontWeight: `${theme('fontWeight.semibold')}`,
@@ -51,9 +65,15 @@ module.exports = {
             backgroundColor: theme('colors.hotpink.dark')
           },
         },
+        '.btn-red': {
+          color: theme('colors.white'),
+          backgroundColor: theme('colors.red.400'),
+          '&:hover': {
+            backgroundColor: theme('colors.red.900')
+          },
+        },
       }
-
-      addComponents(buttons)
+      addComponents(basicStyle)
     })
   ],
 }

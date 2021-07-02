@@ -1,0 +1,23 @@
+@layer components {
+    .header {
+        @apply relative py-2 flex items-center z-0;
+    }
+
+    .header-center {
+        @apply relative w-full justify-start order-2 md:order-1 lg:mx-2;
+    }
+
+    .header-right {
+        @apply justify-end w-1/2 md:w-1/4 order-1;
+    }
+
+    .header-left {
+        @apply justify-start w-1/2 md:w-1/4 md:mr-4 order-1;
+    }
+
+    .header-brand {
+        @apply font-bold text-white text-xs md:text-base;
+    }
+
+
+}

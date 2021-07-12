@@ -1,3 +1,28 @@
+<?php
+function console_log(...$args)
+{
+    $args_as_json = array_map(function ($item) {
+        return json_encode($item);
+    }, $args);
+
+    $js_code = "<script>console.log('%c 💬 log from PHP: ','background: #474A8A; color: #B0B3D6; line-height: 2',";
+    foreach ($args_as_json as $arg) {
+        $js_code .= "{$arg},";
+    }
+    $js_code .= ")</script>";
+
+    echo $js_code;
+}
+
+$list = ['foo', 'bar'];
+$obj = new stdClass();
+$obj->first_name = 'John';
+$obj->last_name = 'Johnson';
+
+echo console_log($list, 'Hello World', 123, $obj);
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +43,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap"
           rel="stylesheet">
-    <!--<script src="//unpkg.com/alpinejs" defer></script>-->
+    <script src="//unpkg.com/alpinejs" defer></script>
 
     <title>Landing tailwind</title>
 </head>
@@ -563,13 +588,6 @@
     <div class="main-menu-overlay"></div>
 </header>
 
-<div x-data="{ open: false }" class="test absolute top-6 ">
-    <button @click="open = true">Expand</button>
-
-    <span x-show="open">
-      Content...aa
-    </span>
-</div>
 
 </body>
 </html>

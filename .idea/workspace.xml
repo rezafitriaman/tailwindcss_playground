@@ -2,25 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d5a5026e-f1b7-4cc6-972b-fc60d790e2f9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/cssdialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/magento2plugin.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/scss/components/header.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/scss/components/icon.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/scss/components/text-field.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ts/textField/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/index.phtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/scss/components/main-menu.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/postcss-tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/postcss-tailwind.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/custom.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/custom.d.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/scss/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/scss/index.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tailwind.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scss/components/header.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/scss/components/header.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scss/components/icon.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/scss/components/icon.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/tailwindcss.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/tailwindcss.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ts/textField/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/textField/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/tailwind.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webpack.config.dev.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.dev.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.config.prod.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.prod.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,13 +38,26 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/ts/textField/index.ts" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/package.json" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/index.hbs" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/scss/components/header.css" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/scss/components/main-menu.css" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tailwind.config.js" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/tailwindcss.ts" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/scss/components/icon.css" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/postcss-tailwind.config.js" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/index.ts" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/scss/components/text-field.css" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1tcBVT6n8y8LoS3nvZqKLMLU735" />
   <component name="ProjectViewState">
@@ -106,7 +114,16 @@
       <workItem from="1624267448406" duration="538000" />
       <workItem from="1625059286047" duration="3382000" />
       <workItem from="1625125477541" duration="18024000" />
-      <workItem from="1625210576084" duration="22276000" />
+      <workItem from="1625210576084" duration="22460000" />
+      <workItem from="1625468296559" duration="2908000" />
+      <workItem from="1625478656028" duration="118000" />
+      <workItem from="1625478876757" duration="16288000" />
+      <workItem from="1625555861255" duration="6541000" />
+      <workItem from="1625640877869" duration="8290000" />
+      <workItem from="1625727743715" duration="798000" />
+      <workItem from="1625812727089" duration="670000" />
+      <workItem from="1626073027014" duration="699000" />
+      <workItem from="1626088218522" duration="600000" />
     </task>
     <servers />
   </component>

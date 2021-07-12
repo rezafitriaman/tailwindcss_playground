@@ -73,6 +73,14 @@ module.exports = (env) => {
     },
     module: {
       rules: [
+/*        {
+          test: /\.phtml$/,
+          use: [
+            {
+              loader: 'phtml-loader',
+            }
+          ]
+        },*/
         {
           enforce: "pre",
           test: /\.(ts|js)x?$/,

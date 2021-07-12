@@ -1,0 +1,56 @@
+@layer components {
+    .main-menu-overlay {
+        @apply hidden h-full fixed inset-0 pointer-events-none bg-black bg-opacity-25 z-10;
+
+        &.active {
+            @apply block pointer-events-auto;
+        }
+    }
+
+    .main-menu {
+        @apply hidden flex-col w-full h-full max-w-screen-sm fixed top-0 left-0
+        transform -translate-x-full overflow-hidden transition-transform duration-300 ease-in
+        border-r border-gray-300 bg-white z-30;
+
+        &.visible {
+            @apply flex;
+        }
+
+        &.active {
+            @apply transform translate-x-0;
+        }
+
+        .slide {
+            @apply h-full transform -translate-x-0 transition-transform duration-300 ease-in;
+
+            &.active {
+                @apply transform -translate-x-full;
+            }
+        }
+
+        .main-nav {
+            @apply flex flex-col flex-nowrap;
+
+            .main-nav--container {
+                @apply flex items-center h-14 border-b border-gray-300;
+
+                .main-nav--link {
+                    @apply flex items-center justify-between h-full w-full text-gray-500;
+                }
+
+                .main-nav--constrain {
+                    @apply z-10 max-h-0 overflow-hidden opacity-0 w-full absolute top-0 left-full bg-white
+                    transition-all duration-150 ease-out;
+
+                    &.active {
+                        @apply opacity-100 max-h-infinite;
+                    }
+
+                    .sub-nav--item  {
+                        @apply flex h-14 border-b border-gray-300 items-center;
+                    }
+                }
+            }
+        }
+    }
+}

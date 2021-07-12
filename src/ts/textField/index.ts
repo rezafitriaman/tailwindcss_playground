@@ -5,6 +5,7 @@ export class TextField {
         this.textField = Array.from(document.querySelectorAll('.text-field'))
     }
     init() {
+
         this.textField.forEach(elm => {
             const input = elm.querySelector('input')!;
 

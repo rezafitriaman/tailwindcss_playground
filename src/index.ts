@@ -1,6 +1,7 @@
 import './scss/index.scss';
 import './index.hbs';
-import {TextField} from './ts/textField/index';
+/*import './index.phtml';*/
+/*import { TextField } from './ts/textField/index';
 
-new TextField().init();
+new TextField().init();*/
 

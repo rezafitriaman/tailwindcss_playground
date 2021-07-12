@@ -19,6 +19,9 @@ module.exports = {
           DEFAULT: '#ff69b4',
           dark: '#ff16d1',
         },
+      },
+      maxHeight: {
+        infinite: '9999px',
       }
     },
     fontFamily: {

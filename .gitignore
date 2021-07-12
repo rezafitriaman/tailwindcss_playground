@@ -105,4 +105,4 @@ dist
 
 # custom ignore
 package-lock.json
-
+!types.d.ts

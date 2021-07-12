@@ -25,6 +25,7 @@
 
 <body class="text-gray-800 antialiased font-sans">
 
+<!--header-->
 <header class="block w-full fixed top-0 left-0 text-black border-b border-solid border-current z-30">
     <!--discount-->
     <div class="discount-block bg-gray-100">
@@ -563,11 +564,87 @@
     <div class="main-menu-overlay"></div>
 </header>
 
-<div x-data="{ open: false }" class="test absolute top-6 ">
-    <button @click="open = true">Expand</button>
+<main class="mt-44 md:mt-32">
+    <!--Resolve "Footer: Implementatie Link blokken"-->
+    <section class="section-links mb-6">
+        <div class="container mx-auto px-4 lg:flex">
+            <ul class="block h-12 lg:h-full w-full lg:w-1/2 border-b lg:border-b-0 border-gray-300 hover:bg-gray-100 lg:hover:bg-transparent">
+                <li class="h-full" tabindex="0">
+                    <a href="#" class="flex justify-between items-center h-full">
+                        <strong class="text-base pl-1 lg:pl-0 lg:mb-1">Klantenservice</strong>
+                        <svg class="lg:hidden" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"
+                             fill="#000000">
+                            <path d="M0 0h24v24H0V0z" fill="none"/>
+                            <path d="M10.02 6L8.61 7.41 13.19 12l-4.58 4.59L10.02 18l6-6-6-6z"/>
+                        </svg>
+                    </a>
+                </li>
+                <li class="hidden lg:block">
+                    <ul class="h-full">
+                        <li class="my-1.5">
+                            <a href="#" class="text-sm text-gray-600 hover:text-pink-300">Contact opnemen</a>
+                        </li>
+                        <li class="my-1.5">
+                            <a href="#" class="text-sm text-gray-600 hover:text-pink-300">Bestellen &amp; Leveren</a>
+                        </li>
+                        <li class="my-1.5">
+                            <a href="#" class="text-sm text-gray-600 hover:text-pink-300">Betalen</a>
+                        </li>
+                        <li class="my-1.5">
+                            <a href="#" class="text-sm text-gray-600 hover:text-pink-300">Retourneren</a>
+                        </li>
+                        <li class="my-1.5">
+                            <a href="#" class="text-sm text-gray-600 hover:text-pink-300">Garantie &amp; Reparatie</a>
+                        </li>
+                    </ul>
+                </li>
+                <li role="separator" class=""></li>
+            </ul>
+
+            <ul class="block h-12 lg:h-full w-full lg:w-1/2 border-b lg:border-b-0 border-gray-300 hover:bg-gray-100 lg:hover:bg-transparent">
+                <li class="h-full" tabindex="0">
+                    <a href="#" class="flex justify-between items-center h-full">
+                        <strong class="text-base pl-1 lg:pl-0 lg:mb-1">Over FotoOpAluminium.nl</strong>
+                        <svg class="lg:hidden" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"
+                             fill="#000000">
+                            <path d="M0 0h24v24H0V0z" fill="none"/>
+                            <path d="M10.02 6L8.61 7.41 13.19 12l-4.58 4.59L10.02 18l6-6-6-6z"/>
+                        </svg>
+                    </a>
+                </li>
+                <li class="hidden lg:block">
+                    <ul class="h-full">
+                        <li class="my-1.5">
+                            <a href="#" class="text-sm text-gray-600 hover:text-pink-300">De voordelen van</a>
+                        </li>
+                        <li class="my-1.5">
+                            <a href="#" class="text-sm text-gray-600 hover:text-pink-300">Nieuws</a>
+                        </li>
+                        <li class="my-1.5">
+                            <a href="#" class="text-sm text-gray-600 hover:text-pink-300">Werken bij</a>
+                        </li>
+                        <li class="my-1.5">
+                            <a href="#" class="text-sm text-gray-600 hover:text-pink-300">duurzaamheid</a>
+                        </li>
+                        <li class="my-1.5">
+                            <a href="#" class="text-sm text-gray-600 hover:text-pink-300">app</a>
+                        </li>
+                        <li class="my-1.5">
+                            <a href="#" class="text-sm text-gray-600 hover:text-pink-300">Bedrijfsgegevens</a>
+                        </li>
+                    </ul>
+                </li>
+                <li role="separator" class=""></li>
+            </ul>
+        </div>
+    </section>
+</main>
+
+<div x-data="{ open: false }" class="test bg-pink-300 mt-6">
+    <button @click="open = !open">Expand</button>
 
     <span x-show="open">
-      Content...aa
+      Content..
     </span>
 </div>
 

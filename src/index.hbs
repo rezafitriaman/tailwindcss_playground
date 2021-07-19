@@ -566,13 +566,14 @@
 
 <main class="mt-44 md:mt-32">
     <!--Resolve "Footer: Implementatie Link blokken"-->
-    <section class="section-links mb-6">
+    <section class="section-links mb-6 hidden">
         <div class="container mx-auto px-4 lg:flex">
             <ul class="block h-12 lg:h-full w-full lg:w-1/2 border-b lg:border-b-0 border-gray-300 hover:bg-gray-100 lg:hover:bg-transparent">
                 <li class="h-full" tabindex="0">
                     <a href="#" class="flex justify-between items-center h-full">
                         <strong class="text-base pl-1 lg:pl-0 lg:mb-1">Klantenservice</strong>
-                        <svg class="lg:hidden" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"
+                        <svg class="lg:hidden" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24"
+                             width="24px"
                              fill="#000000">
                             <path d="M0 0h24v24H0V0z" fill="none"/>
                             <path d="M10.02 6L8.61 7.41 13.19 12l-4.58 4.59L10.02 18l6-6-6-6z"/>
@@ -605,7 +606,8 @@
                 <li class="h-full" tabindex="0">
                     <a href="#" class="flex justify-between items-center h-full">
                         <strong class="text-base pl-1 lg:pl-0 lg:mb-1">Over FotoOpAluminium.nl</strong>
-                        <svg class="lg:hidden" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"
+                        <svg class="lg:hidden" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24"
+                             width="24px"
                              fill="#000000">
                             <path d="M0 0h24v24H0V0z" fill="none"/>
                             <path d="M10.02 6L8.61 7.41 13.19 12l-4.58 4.59L10.02 18l6-6-6-6z"/>
@@ -638,15 +640,537 @@
             </ul>
         </div>
     </section>
+
+    <!--project new-->
+    <section class="section-accordion" id="section-accordion">
+        <div class="container">
+            <!--title-->
+            <h3 class="text-xl font-bold mb-4">Ontdek alles bij FotoOpAluminium.nl</h3>
+            <!-- footer navigation -->
+            <div class="footer-nav md:flex">
+                <!--new column-->
+                <ul class="accordion flex-1 md:pr-4"><!--first column-->
+                    <li class="accordion-list md:mb-5" x-data="{ open: false }">
+                        <!--accordion header-->
+                        <div class="accordion-list-title" tabindex="0" @click="open = !open">
+                            <strong class="text-base">Foto op aluminium</strong>
+                            <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
+                            </span>
+                            <span class="expand_more absolute right-0 md:hidden" aria-hidden="true" x-show="open">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
+                            </span>
+                        </div>
+                        <!--accordion body-->
+                        <span class="accordion-list-content max-h-0" x-bind:class="open ? 'max-h-infinite' : ''">
+                            <ul class="accordion-list-content--navigation-group">
+                                <li class="accordion-list-content--item mb-2">
+                                    <div class="image-container hidden">
+                                        <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
+                                    </div>
+                                    <div class="link-container">
+                                        <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
+                                    </div>
+                                </li>
+                                <li class="accordion-list-content--item mb-2">
+                                    <div class="image-container hidden">
+                                        <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
+                                    </div>
+                                    <div class="link-container">
+                                        <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
+                                    </div>
+                                </li>
+                                <li class="accordion-list-content--item mb-2">
+                                    <div class="image-container hidden">
+                                        <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
+                                    </div>
+                                    <div class="link-container">
+                                        <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </span>
+                    </li>
+                    <li role="separator" class="separator"></li>
+                    <li class="accordion-list md:mb-5" x-data="{ open: false }">
+                        <!--accordion header-->
+                        <div class="accordion-list-title" tabindex="0" @click="open = !open">
+                            <strong class="text-base">Foto op aluminium</strong>
+                            <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
+                            </span>
+                            <span class="expand_more absolute right-0 md:hidden" aria-hidden="true" x-show="open">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
+                            </span>
+                        </div>
+                        <!--accordion body-->
+                        <span class="accordion-list-content max-h-0" x-bind:class="open ? 'max-h-infinite' : ''">
+                            <ul class="accordion-list-content--navigation-group">
+                                <li class="accordion-list-content--item mb-2">
+                                    <div class="image-container hidden">
+                                        <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
+                                    </div>
+                                    <div class="link-container">
+                                        <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
+                                    </div>
+                                </li>
+                                <li class="accordion-list-content--item mb-2">
+                                    <div class="image-container hidden">
+                                        <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
+                                    </div>
+                                    <div class="link-container">
+                                        <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
+                                    </div>
+                                </li>
+                                <li class="accordion-list-content--item mb-2">
+                                    <div class="image-container hidden">
+                                        <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
+                                    </div>
+                                    <div class="link-container">
+                                        <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </span>
+                    </li>
+                    <li role="separator" class="separator"></li>
+                    <li class="accordion-list md:mb-5" x-data="{ open: false }">
+                        <!--accordion header-->
+                        <div class="accordion-list-title" tabindex="0" @click="open = !open">
+                            <strong class="text-base">Foto op aluminium</strong>
+                            <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
+                            </span>
+                            <span class="expand_more absolute right-0 md:hidden" aria-hidden="true" x-show="open">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
+                            </span>
+                        </div>
+                        <!--accordion body-->
+                        <span class="accordion-list-content max-h-0" x-bind:class="open ? 'max-h-infinite' : ''">
+                            <ul class="accordion-list-content--navigation-group">
+                                <li class="accordion-list-content--item mb-2">
+                                    <div class="image-container hidden">
+                                        <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
+                                    </div>
+                                    <div class="link-container">
+                                        <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
+                                    </div>
+                                </li>
+                                <li class="accordion-list-content--item mb-2">
+                                    <div class="image-container hidden">
+                                        <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
+                                    </div>
+                                    <div class="link-container">
+                                        <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
+                                    </div>
+                                </li>
+                                <li class="accordion-list-content--item mb-2">
+                                    <div class="image-container hidden">
+                                        <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
+                                    </div>
+                                    <div class="link-container">
+                                        <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </span>
+                    </li>
+                    <li role="separator" class="separator"></li>
+                </ul>
+                <!--new column-->
+                <ul class="accordion flex-1 md:pr-4"><!--first column-->
+                    <li class="accordion-list md:mb-5" x-data="{ open: false }">
+                        <!--accordion header-->
+                        <div class="accordion-list-title" tabindex="0" @click="open = !open">
+                            <strong class="text-base">Foto op aluminium</strong>
+                            <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
+                            </span>
+                            <span class="expand_more absolute right-0 md:hidden" aria-hidden="true" x-show="open">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
+                            </span>
+                        </div>
+                        <!--accordion body-->
+                        <span class="accordion-list-content max-h-0" x-bind:class="open ? 'max-h-infinite' : ''">
+                            <ul class="accordion-list-content--navigation-group">
+                                <li class="accordion-list-content--item mb-2">
+                                    <div class="image-container hidden">
+                                        <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
+                                    </div>
+                                    <div class="link-container">
+                                        <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
+                                    </div>
+                                </li>
+                                <li class="accordion-list-content--item mb-2">
+                                    <div class="image-container hidden">
+                                        <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
+                                    </div>
+                                    <div class="link-container">
+                                        <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
+                                    </div>
+                                </li>
+                                <li class="accordion-list-content--item mb-2">
+                                    <div class="image-container hidden">
+                                        <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
+                                    </div>
+                                    <div class="link-container">
+                                        <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </span>
+                    </li>
+                    <li role="separator" class="separator"></li>
+                    <li class="accordion-list md:mb-5" x-data="{ open: false }">
+                        <!--accordion header-->
+                        <div class="accordion-list-title" tabindex="0" @click="open = !open">
+                            <strong class="text-base">Foto op aluminium</strong>
+                            <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
+                            </span>
+                            <span class="expand_more absolute right-0 md:hidden" aria-hidden="true" x-show="open">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
+                            </span>
+                        </div>
+                        <!--accordion body-->
+                        <span class="accordion-list-content max-h-0" x-bind:class="open ? 'max-h-infinite' : ''">
+                            <ul class="accordion-list-content--navigation-group">
+                                <li class="accordion-list-content--item mb-2">
+                                    <div class="image-container hidden">
+                                        <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
+                                    </div>
+                                    <div class="link-container">
+                                        <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
+                                    </div>
+                                </li>
+                                <li class="accordion-list-content--item mb-2">
+                                    <div class="image-container hidden">
+                                        <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
+                                    </div>
+                                    <div class="link-container">
+                                        <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
+                                    </div>
+                                </li>
+                                <li class="accordion-list-content--item mb-2">
+                                    <div class="image-container hidden">
+                                        <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
+                                    </div>
+                                    <div class="link-container">
+                                        <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </span>
+                    </li>
+                    <li role="separator" class="separator"></li>
+                    <li class="accordion-list md:mb-5" x-data="{ open: false }">
+                        <!--accordion header-->
+                        <div class="accordion-list-title" tabindex="0" @click="open = !open">
+                            <strong class="text-base">Foto op aluminium</strong>
+                            <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
+                            </span>
+                            <span class="expand_more absolute right-0 md:hidden" aria-hidden="true" x-show="open">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
+                            </span>
+                        </div>
+                        <!--accordion body-->
+                        <span class="accordion-list-content max-h-0" x-bind:class="open ? 'max-h-infinite' : ''">
+                            <ul class="accordion-list-content--navigation-group">
+                                <li class="accordion-list-content--item mb-2">
+                                    <div class="image-container hidden">
+                                        <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
+                                    </div>
+                                    <div class="link-container">
+                                        <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
+                                    </div>
+                                </li>
+                                <li class="accordion-list-content--item mb-2">
+                                    <div class="image-container hidden">
+                                        <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
+                                    </div>
+                                    <div class="link-container">
+                                        <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
+                                    </div>
+                                </li>
+                                <li class="accordion-list-content--item mb-2">
+                                    <div class="image-container hidden">
+                                        <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
+                                    </div>
+                                    <div class="link-container">
+                                        <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </span>
+                    </li>
+                    <li role="separator" class="separator"></li>
+                </ul>
+                <!--new column-->
+                <ul class="accordion flex-1 md:pr-4"><!--first column-->
+                    <li class="accordion-list md:mb-5" x-data="{ open: false }">
+                        <!--accordion header-->
+                        <div class="accordion-list-title" tabindex="0" @click="open = !open">
+                            <strong class="text-base">Foto op aluminium</strong>
+                            <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
+                            </span>
+                            <span class="expand_more absolute right-0 md:hidden" aria-hidden="true" x-show="open">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
+                            </span>
+                        </div>
+                        <!--accordion body-->
+                        <span class="accordion-list-content max-h-0" x-bind:class="open ? 'max-h-infinite' : ''">
+                            <ul class="accordion-list-content--navigation-group">
+                                <li class="accordion-list-content--item mb-2">
+                                    <div class="image-container hidden">
+                                        <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
+                                    </div>
+                                    <div class="link-container">
+                                        <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
+                                    </div>
+                                </li>
+                                <li class="accordion-list-content--item mb-2">
+                                    <div class="image-container hidden">
+                                        <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
+                                    </div>
+                                    <div class="link-container">
+                                        <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
+                                    </div>
+                                </li>
+                                <li class="accordion-list-content--item mb-2">
+                                    <div class="image-container hidden">
+                                        <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
+                                    </div>
+                                    <div class="link-container">
+                                        <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </span>
+                    </li>
+                    <li role="separator" class="separator"></li>
+                    <li class="accordion-list md:mb-5" x-data="{ open: false }">
+                        <!--accordion header-->
+                        <div class="accordion-list-title" tabindex="0" @click="open = !open">
+                            <strong class="text-base">Foto op aluminium</strong>
+                            <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
+                            </span>
+                            <span class="expand_more absolute right-0 md:hidden" aria-hidden="true" x-show="open">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
+                            </span>
+                        </div>
+                        <!--accordion body-->
+                        <span class="accordion-list-content max-h-0" x-bind:class="open ? 'max-h-infinite' : ''">
+                            <ul class="accordion-list-content--navigation-group">
+                                <li class="accordion-list-content--item mb-2">
+                                    <div class="image-container hidden">
+                                        <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
+                                    </div>
+                                    <div class="link-container">
+                                        <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
+                                    </div>
+                                </li>
+                                <li class="accordion-list-content--item mb-2">
+                                    <div class="image-container hidden">
+                                        <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
+                                    </div>
+                                    <div class="link-container">
+                                        <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
+                                    </div>
+                                </li>
+                                <li class="accordion-list-content--item mb-2">
+                                    <div class="image-container hidden">
+                                        <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
+                                    </div>
+                                    <div class="link-container">
+                                        <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </span>
+                    </li>
+                    <li role="separator" class="separator"></li>
+                    <li class="accordion-list md:mb-5" x-data="{ open: false }">
+                        <!--accordion header-->
+                        <div class="accordion-list-title" tabindex="0" @click="open = !open">
+                            <strong class="text-base">Foto op aluminium</strong>
+                            <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
+                            </span>
+                            <span class="expand_more absolute right-0 md:hidden" aria-hidden="true" x-show="open">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
+                            </span>
+                        </div>
+                        <!--accordion body-->
+                        <span class="accordion-list-content max-h-0" x-bind:class="open ? 'max-h-infinite' : ''">
+                            <ul class="accordion-list-content--navigation-group">
+                                <li class="accordion-list-content--item mb-2">
+                                    <div class="image-container hidden">
+                                        <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
+                                    </div>
+                                    <div class="link-container">
+                                        <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
+                                    </div>
+                                </li>
+                                <li class="accordion-list-content--item mb-2">
+                                    <div class="image-container hidden">
+                                        <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
+                                    </div>
+                                    <div class="link-container">
+                                        <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
+                                    </div>
+                                </li>
+                                <li class="accordion-list-content--item mb-2">
+                                    <div class="image-container hidden">
+                                        <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
+                                    </div>
+                                    <div class="link-container">
+                                        <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </span>
+                    </li>
+                    <li role="separator" class="separator"></li>
+                </ul>
+                <!--new column-->
+                <ul class="accordion flex-1 md:pr-4"><!--first column-->
+                    <li class="accordion-list md:mb-5" x-data="{ open: false }">
+                        <!--accordion header-->
+                        <div class="accordion-list-title" tabindex="0" @click="open = !open">
+                            <strong class="text-base">Foto op aluminium</strong>
+                            <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
+                            </span>
+                            <span class="expand_more absolute right-0 md:hidden" aria-hidden="true" x-show="open">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
+                            </span>
+                        </div>
+                        <!--accordion body-->
+                        <span class="accordion-list-content max-h-0" x-bind:class="open ? 'max-h-infinite' : ''">
+                            <ul class="accordion-list-content--navigation-group">
+                                <li class="accordion-list-content--item mb-2">
+                                    <div class="image-container hidden">
+                                        <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
+                                    </div>
+                                    <div class="link-container">
+                                        <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
+                                    </div>
+                                </li>
+                                <li class="accordion-list-content--item mb-2">
+                                    <div class="image-container hidden">
+                                        <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
+                                    </div>
+                                    <div class="link-container">
+                                        <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
+                                    </div>
+                                </li>
+                                <li class="accordion-list-content--item mb-2">
+                                    <div class="image-container hidden">
+                                        <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
+                                    </div>
+                                    <div class="link-container">
+                                        <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </span>
+                    </li>
+                    <li role="separator" class="separator"></li>
+                    <li class="accordion-list md:mb-5" x-data="{ open: false }">
+                        <!--accordion header-->
+                        <div class="accordion-list-title" tabindex="0" @click="open = !open">
+                            <strong class="text-base">Foto op aluminium</strong>
+                            <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
+                            </span>
+                            <span class="expand_more absolute right-0 md:hidden" aria-hidden="true" x-show="open">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
+                            </span>
+                        </div>
+                        <!--accordion body-->
+                        <span class="accordion-list-content max-h-0" x-bind:class="open ? 'max-h-infinite' : ''">
+                            <ul class="accordion-list-content--navigation-group">
+                                <li class="accordion-list-content--item mb-2">
+                                    <div class="image-container hidden">
+                                        <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
+                                    </div>
+                                    <div class="link-container">
+                                        <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
+                                    </div>
+                                </li>
+                                <li class="accordion-list-content--item mb-2">
+                                    <div class="image-container hidden">
+                                        <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
+                                    </div>
+                                    <div class="link-container">
+                                        <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
+                                    </div>
+                                </li>
+                                <li class="accordion-list-content--item mb-2">
+                                    <div class="image-container hidden">
+                                        <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
+                                    </div>
+                                    <div class="link-container">
+                                        <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </span>
+                    </li>
+                    <li role="separator" class="separator"></li>
+                    <li class="accordion-list md:mb-5" x-data="{ open: false }">
+                        <!--accordion header-->
+                        <div class="accordion-list-title" tabindex="0" @click="open = !open">
+                            <strong class="text-base">Foto op aluminium</strong>
+                            <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
+                            </span>
+                            <span class="expand_more absolute right-0 md:hidden" aria-hidden="true" x-show="open">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
+                            </span>
+                        </div>
+                        <!--accordion body-->
+                        <span class="accordion-list-content max-h-0" x-bind:class="open ? 'max-h-infinite' : ''">
+                            <ul class="accordion-list-content--navigation-group">
+                                <li class="accordion-list-content--item mb-2">
+                                    <div class="image-container hidden">
+                                        <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
+                                    </div>
+                                    <div class="link-container">
+                                        <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
+                                    </div>
+                                </li>
+                                <li class="accordion-list-content--item mb-2">
+                                    <div class="image-container hidden">
+                                        <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
+                                    </div>
+                                    <div class="link-container">
+                                        <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
+                                    </div>
+                                </li>
+                                <li class="accordion-list-content--item mb-2">
+                                    <div class="image-container hidden">
+                                        <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
+                                    </div>
+                                    <div class="link-container">
+                                        <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </span>
+                    </li>
+                    <li role="separator" class="separator"></li>
+                </ul>
+            </div>
+            <!-- end footer navigation -->
+
+        </div>
+    </section>
 </main>
 
-<div x-data="{ open: false }" class="test bg-pink-300 mt-6">
-    <button @click="open = !open">Expand</button>
-
-    <span x-show="open">
-      Content..
-    </span>
-</div>
 
 </body>
 </html>

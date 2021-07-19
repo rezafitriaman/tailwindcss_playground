@@ -1,0 +1,11 @@
+@layer components {
+    .accordion-list-title {
+        @apply relative select-none flex items-center overflow-hidden content-start h-12;
+    }
+    .accordion-list-content {
+        @apply block overflow-hidden md:max-h-full transition-all duration-300 ease-in-out;
+    }
+    .separator {
+        @apply border-b border-gray-200 border-solid md:hidden;
+    }
+}

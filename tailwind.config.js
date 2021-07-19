@@ -21,7 +21,7 @@ module.exports = {
         },
       },
       maxHeight: {
-        infinite: '9999px',
+        infinite: '999px',
       }
     },
     fontFamily: {
@@ -37,14 +37,14 @@ module.exports = {
   },
   plugins: [
     plugin(function({ addBase, theme }) {
-      addBase({
+/*      addBase({
         'h1': {
           fontSize: theme('fontSize.2xl'),
           color: theme('colors.red.400')
         },
         'h2': { fontSize: theme('fontSize.xl') },
         'h3': { fontSize: theme('fontSize.lg') },
-      })
+      })*/
     }),
     plugin(function({ addComponents, theme }) {
       const basicStyle = {

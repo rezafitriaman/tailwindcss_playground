@@ -3,9 +3,15 @@ import './index.hbs';
 
 import AlpineCode from 'alpinejs'
 
-AlpineCode.start()
+AlpineCode.start();
 
+AlpineCode.data('dropdown', () => ({
+    open: false,
 
+    toggle() {
+        this.open = ! this.open
+    }
+}))
 
 
 

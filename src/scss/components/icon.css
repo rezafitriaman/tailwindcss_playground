@@ -1,6 +1,6 @@
 @layer components {
     .icon {
-        @apply focus:outline-none w-10 h-10 flex items-center justify-center;
+        @apply focus:outline-none w-10 h-10 flex items-center justify-center relative hover:text-pink-500;
 
         svg {
             @apply fill-current w-6 h-6;

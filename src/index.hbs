@@ -31,8 +31,8 @@
     <div class="discount-block bg-gray-100">
         <div class="container">
             <div class="flex items-center justify-center h-8">
-                <p class="text-xs sm:text-sm md:text-base font-light">Gebruik kortingscode <strong class="font-bold">ALU70</strong>
-                    en ontvang
+                <p class="text-xs sm:text-sm md:text-base font-light">Gebruik kortingscode
+                    <strong class="font-bold">ALU70</strong>en ontvang
                     <strong class="font-bold">70% korting</strong></p>
             </div>
         </div>
@@ -42,7 +42,7 @@
     <div class="header-sections relative max-h-26 bg-black overflow-hidden transition-max-h-26 duration-300 ease-out hide-on-scroll">
         <div class="container">
             <div class="flex flex-wrap md:flex-nowrap">
-
+                <!--left-->
                 <div class="header header-left text-white">
                     <div class="md:hidden">
                         <button class="header-hamburger icon"
@@ -56,16 +56,36 @@
                     </div>
                     <a href="#" class="header-brand">FotoOpAluminium.nl</a>
                 </div>
+                <script>
+                    function initSearch() {
+                        return {
+                            focusinFn(input) {
+                                input.nextElementSibling.classList.add('active');
+                            },
+                            focusoutFn(input) {
+                                const inputEmpty = !input.value;
 
-                <div class="header header-center text-white">
+                                if(inputEmpty) {
+                                    input.nextElementSibling.classList.remove('active');
+                                }
+                            }
+                        };
+                    }
+                </script>
+                <!--center-->
+                <div class="header header-center text-gray-600" x-data="initSearch()">
                     <form class="header-search-form w-full">
                         <div class="text-field">
-                            <input class="border-hotpink" type="text" id="text-field-filled-trailing"
-                                   aria-describedby="text-field-filled-trailing-helper-text">
-                            <label class="text-hotpink" for="text-field-filled-trailing">Waar ben je naar
-                                opzoek?</label>
-                            <div class="suffix-icon">
-                                <svg class="text-hotpink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <input class="border-pink-500"
+                                   type="text"
+                                   id="text-field-filled-trailing"
+                                   aria-describedby="text-field-filled-trailing-helper-text"
+                                   x-ref="target"
+                                   x-on:focusin="focusinFn($refs.target)"
+                                   x-on:focusout="focusoutFn($refs.target)">
+                            <label class="text-pink-500" for="text-field-filled-trailing">Waar ben je naar opzoek?</label>
+                            <div class="suffix-icon text-pink-500">
+                                <svg class="fill-current w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                     <path d="M0 0h24v24H0V0z" fill="none"/>
                                     <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
                                 </svg>
@@ -73,16 +93,16 @@
                         </div>
                     </form>
                 </div>
-
+                <!--right-->
                 <div class="header header-right text-white">
-                    <div class="header-account flex">
-                        <ul class="hidden lg:flex flex-col justify-center text-right text-sm font-normal ml-1">
+                    <div class="header-account flex relative group">
+                        <ul class="hidden lg:flex flex-col justify-center text-right text-sm font-normal ml-1 cursor-pointer">
                             <li>Welkom</li>
                             <li>
                                 <strong>Sierk</strong>
                             </li>
                         </ul>
-                        <button class="icon"
+                        <button class="icon group-hover:text-pink-500"
                                 aria-label="account">
                             <svg xmlns="http://www.w3.org/2000/svg"
                                  viewBox="0 0 24 24">
@@ -110,184 +130,293 @@
             </div>
         </div>
     </div>
-
-    <!--main menu-->
-    <!--<div class="main-menu         visible active">-->
-    <div class="main-menu">
+    <!-- main menu -->
+    <div class="main-menu           visible active">
         <!-- close button -->
-        <div class="flex justify-end items-center h-14 border-b border-gray-300 text-black">
-            <button class="icon" aria-expanded="false" aria-label="ariaCloseMenu">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path d="M0 0h24v24H0z" fill="none"></path>
-                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+        <div class="close-button-container">
+            <button class="icon"
+                    aria-expanded="false"
+                    aria-label="ariaCloseMenu">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24">
+                    <path d="M0 0h24v24H0z" fill="none"/>
+                    <path
+                            d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
                 </svg>
             </button>
         </div>
         <!-- scroll pane -->
-        <div class="scroll-pane h-full mb-4 overflow-x-hidden">
-            <!-- slide -->
-            <div class="slide       active">
-                <div class="slide-content h-full">
-                    <nav class="container flex flex-col">
+        <div class="scroll-pane">
+            <div class="slide           active">
+                <div class="w-full">
+                    <!--nav-->
+                    <nav class="main-nav-container">
                         <ul class="main-nav">
-                            <li class="main-nav--container has-child">
-                                <a href="#" class="main-nav--link">
-                                    <span class="relative z-40 text-black text-sm">Product kiezen</span>
-                                    <button class="icon text-black">
-                                        <svg class="relative z-40 transform -rotate-90"
-                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                            <path d="M0 0h24v24H0z" fill="none"></path>
-                                            <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"></path>
-                                        </svg>
-                                    </button>
+                            <li class="nav-container has-child" aria-haspopup="true">
+                                <a href="#" class="nav-link">
+                                    <span>Product kiezen</span>
+                                    <svg class="fill-current w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path d="M0 0h24v24H0V0z" fill="none"/>
+                                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6-6-6z"/>
+                                    </svg>
                                 </a>
-                                <div class="main-nav--constrain         active">
+                                <div class="nav-constrain           active">
+                                    <!--TODO next-->
                                     <div class="container">
-                                        <!-- back -->
-                                        <div class="main-nav--back flex h-14 items-center">
-                                            <a href="#" class="flex items-center h-full w-full">
-                                                <button class="icon text-black">
-                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                         viewBox="0 0 24 24">
-                                                        <path d="M0 0h24v24H0z" fill="none"></path>
-                                                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
-                                                    </svg>
-                                                </button>
-                                                <span class="text-black">Naar overzicht</span>
+                                        <div class="back-container w-full h-16">
+                                            <a href="#" class="link flex justify-start items-center h-16">
+                                                <svg xmlns="http://www.w3.org/2000/svg" height="24px"
+                                                     viewBox="0 0 24 24" width="24px" fill="#000000">
+                                                    <path d="M0 0h24v24H0z" fill="none"/>
+                                                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                                                </svg>
+                                                <span>Naar overzicht</span>
                                             </a>
                                         </div>
-                                        <!-- layout -->
-                                        <div class="main-nav--layout">
-                                            <div class="main-nav--item">
+
+                                        <div class="nav-layout">
+                                            <div class="nav-item">
                                                 <ul class="sub-nav">
-                                                    <li class="sub-nav--item">
-                                                        <strong>Product
+                                                    <li class="nav-item">
+                                                        <strong class="mdc-typography--caption">Product
                                                             kiezen</strong>
                                                     </li>
-
-
-                                                    <li class="sub-nav--item">
-                                                        <a href="#" class="font-light">Foto op
+                                                    <li class="nav-item">
+                                                        <a href="#" class="mdc-typography--caption">Foto
+                                                            aluminium</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                            karton</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a href="#" class="mdc-typography--caption">Foto op
                                                             meerluik</a>
                                                     </li>
-
-                                                    <li class="sub-nav--item">
-                                                        <a href="#" class="font-light">Foto op
+                                                    <li class="nav-item">
+                                                        <a href="#" class="mdc-typography--caption">Poster met
+                                                            posterhanger</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a href="#" class="mdc-typography--caption">Foto op
                                                             wandcirkel</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="main-nav--item">
+                                                <ul class="sub-nav">
+                                                    <li class="sub-nav--item">
+                                                        <strong class="mdc-typography--caption">Fotocollage</strong>
+                                                    </li>
+                                                    <li class="sub-nav--item">
+                                                        <a href="#" class="mdc-typography--caption">Squares
+                                                            collage</a>
+                                                    </li>
+                                                    <li class="sub-nav--item">
+                                                        <a href="#" class="mdc-typography--caption">Hexagon
+                                                            collage</a>
+                                                    </li>
+                                                    <li class="sub-nav--item">
+                                                        <a href="#" class="mdc-typography--caption">Glasblokken</a>
+                                                    </li>
+                                                    <li class="sub-nav--item">
+                                                        <a href="#" class="mdc-typography--caption">Ruitjes
+                                                            collage</a>
+                                                    </li>
+                                                    <li class="sub-nav--item">
+                                                        <a href="#" class="mdc-typography--caption">Alle
+                                                            fotocollage</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="main-nav--item">
+                                                <ul class="sub-nav">
+                                                    <li class="sub-nav--item">
+                                                        <strong class="mdc-typography--caption">Buiten</strong>
+                                                    </li>
+                                                    <li class="sub-nav--item">
+                                                        <a href="#" class="mdc-typography--caption">Tuinposter met
+                                                            foto</a>
+                                                    </li>
+                                                    <li class="sub-nav--item">
+                                                        <a href="#" class="mdc-typography--caption">Foto op glas</a>
+                                                    </li>
+                                                    <li class="sub-nav--item">
+                                                        <a href="#" class="mdc-typography--caption">Hexagon
+                                                            (Muchopix)</a>
+                                                    </li>
+                                                    <li class="sub-nav--item">
+                                                        <a href="#" class="mdc-typography--caption">Tuincirkels</a>
+                                                    </li>
+                                                    <li class="sub-nav--item">
+                                                        <a href="#" class="mdc-typography--caption">Raamfolie</a>
                                                     </li>
                                                 </ul>
                                             </div>
                                         </div>
 
-                                        <div class="main-nav--layout">
+                                        <div class="nav-layout">
                                             <div class="main-nav--item">
                                                 <ul class="sub-nav">
                                                     <li class="sub-nav--item">
-                                                        <strong>Muurdecoratie
+                                                        <strong class="mdc-typography--caption">Muurdecoratie
                                                             collectie</strong>
                                                     </li>
-
-
                                                     <li class="sub-nav--item">
-                                                        <a href="#" class="font-light">Foto op
-                                                            wandcirkel</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-
-                                        <div class="main-nav--layout">
-                                            <div class="main-nav--item">
-                                                <ul class="sub-nav">
-                                                    <li class="sub-nav--item">
-                                                        <strong>Muurdecoratie</strong>
+                                                        <a href="#" class="mdc-typography--caption">Foto
+                                                            aluminium</a>
                                                     </li>
                                                     <li class="sub-nav--item">
-                                                        <a href="#" class="font-light">Foto op
+                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                            karton</a>
+                                                    </li>
+                                                    <li class="sub-nav--item">
+                                                        <a href="#" class="mdc-typography--caption">Foto op
                                                             meerluik</a>
                                                     </li>
                                                     <li class="sub-nav--item">
-                                                        <a href="#" class="font-light">Poster met
+                                                        <a href="#" class="mdc-typography--caption">Poster met
                                                             posterhanger</a>
                                                     </li>
                                                     <li class="sub-nav--item">
-                                                        <a href="#" class="font-light">Foto op
+                                                        <a href="#" class="mdc-typography--caption">Foto op
                                                             wandcirkel</a>
                                                     </li>
                                                 </ul>
                                             </div>
+
                                             <div class="main-nav--item">
                                                 <ul class="sub-nav">
                                                     <li class="sub-nav--item">
-                                                        <strong>Fotocollage</strong>
+                                                        <strong class="mdc-typography--caption">Fotocollage</strong>
                                                     </li>
                                                     <li class="sub-nav--item">
-                                                        <a href="#" class="font-light">Squares
+                                                        <a href="#" class="mdc-typography--caption">Squares
                                                             collage</a>
                                                     </li>
                                                     <li class="sub-nav--item">
-                                                        <a href="#" class="font-light">Hexagon
+                                                        <a href="#" class="mdc-typography--caption">Hexagon
                                                             collage</a>
+                                                    </li>
+                                                    <li class="sub-nav--item">
+                                                        <a href="#" class="mdc-typography--caption">Glasblokken</a>
+                                                    </li>
+                                                    <li class="sub-nav--item">
+                                                        <a href="#" class="mdc-typography--caption">Ruitjes
+                                                            collage</a>
+                                                    </li>
+                                                    <li class="sub-nav--item">
+                                                        <a href="#" class="mdc-typography--caption">Alle
+                                                            fotocollage</a>
                                                     </li>
                                                 </ul>
                                             </div>
+
                                             <div class="main-nav--item">
                                                 <ul class="sub-nav">
                                                     <li class="sub-nav--item">
-                                                        <strong>Fotocollage</strong>
+                                                        <strong class="mdc-typography--caption">Buiten</strong>
                                                     </li>
                                                     <li class="sub-nav--item">
-                                                        <a href="#" class="font-light">Squares
-                                                            collage</a>
+                                                        <a href="#" class="mdc-typography--caption">Tuinposter met
+                                                            foto</a>
                                                     </li>
                                                     <li class="sub-nav--item">
-                                                        <a href="#" class="font-light">Hexagon
-                                                            collage</a>
+                                                        <a href="#" class="mdc-typography--caption">Foto op glas</a>
+                                                    </li>
+                                                    <li class="sub-nav--item">
+                                                        <a href="#" class="mdc-typography--caption">Hexagon
+                                                            (Muchopix)</a>
+                                                    </li>
+                                                    <li class="sub-nav--item">
+                                                        <a href="#" class="mdc-typography--caption">Tuincirkels</a>
+                                                    </li>
+                                                    <li class="sub-nav--item">
+                                                        <a href="#" class="mdc-typography--caption">Raamfolie</a>
                                                     </li>
                                                 </ul>
                                             </div>
+                                        </div>
+
+                                        <div class="nav-layout">
                                             <div class="main-nav--item">
                                                 <ul class="sub-nav">
                                                     <li class="sub-nav--item">
-                                                        <strong>Fotocollage</strong>
+                                                        <strong class="mdc-typography--caption">Muurdecoratie
+                                                            sss</strong>
                                                     </li>
                                                     <li class="sub-nav--item">
-                                                        <a href="#" class="font-light">Squares
-                                                            collage</a>
+                                                        <a href="#" class="mdc-typography--caption">Foto
+                                                            aluminium</a>
                                                     </li>
                                                     <li class="sub-nav--item">
-                                                        <a href="#" class="font-light">Hexagon
-                                                            collage</a>
+                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                            karton</a>
+                                                    </li>
+                                                    <li class="sub-nav--item">
+                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                            meerluik</a>
+                                                    </li>
+                                                    <li class="sub-nav--item">
+                                                        <a href="#" class="mdc-typography--caption">Poster met
+                                                            posterhanger</a>
+                                                    </li>
+                                                    <li class="sub-nav--item">
+                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                            wandcirkel</a>
                                                     </li>
                                                 </ul>
                                             </div>
+
                                             <div class="main-nav--item">
                                                 <ul class="sub-nav">
                                                     <li class="sub-nav--item">
-                                                        <strong>Fotocollage</strong>
+                                                        <strong class="mdc-typography--caption">Fotocollage</strong>
                                                     </li>
                                                     <li class="sub-nav--item">
-                                                        <a href="#" class="font-light">Squares
+                                                        <a href="#" class="mdc-typography--caption">Squares
                                                             collage</a>
                                                     </li>
                                                     <li class="sub-nav--item">
-                                                        <a href="#" class="font-light">Hexagon
+                                                        <a href="#" class="mdc-typography--caption">Hexagon
                                                             collage</a>
+                                                    </li>
+                                                    <li class="sub-nav--item">
+                                                        <a href="#" class="mdc-typography--caption">Glasblokken</a>
+                                                    </li>
+                                                    <li class="sub-nav--item">
+                                                        <a href="#" class="mdc-typography--caption">Ruitjes
+                                                            collage</a>
+                                                    </li>
+                                                    <li class="sub-nav--item">
+                                                        <a href="#" class="mdc-typography--caption">Alle
+                                                            fotocollage</a>
                                                     </li>
                                                 </ul>
                                             </div>
+
                                             <div class="main-nav--item">
                                                 <ul class="sub-nav">
                                                     <li class="sub-nav--item">
-                                                        <strong>Fotocollage</strong>
+                                                        <strong class="mdc-typography--caption">Buiten</strong>
                                                     </li>
                                                     <li class="sub-nav--item">
-                                                        <a href="#" class="font-light">Squares
-                                                            collage</a>
+                                                        <a href="#" class="mdc-typography--caption">Tuinposter met
+                                                            foto</a>
                                                     </li>
                                                     <li class="sub-nav--item">
-                                                        <a href="#" class="font-light">Hexagon
-                                                            collage</a>
+                                                        <a href="#" class="mdc-typography--caption">Foto op glas</a>
+                                                    </li>
+                                                    <li class="sub-nav--item">
+                                                        <a href="#" class="mdc-typography--caption">Hexagon
+                                                            (Muchopix)</a>
+                                                    </li>
+                                                    <li class="sub-nav--item">
+                                                        <a href="#" class="mdc-typography--caption">Tuincirkels</a>
+                                                    </li>
+                                                    <li class="sub-nav--item">
+                                                        <a href="#" class="mdc-typography--caption">Raamfolie</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -295,228 +424,599 @@
                                     </div>
                                 </div>
                             </li>
-
-                            <li class="main-nav--container has-child">
-                                <a href="#" class="main-nav--link">
-                                    <span class="relative z-40 text-black text-sm">Product kiezen</span>
-                                    <button class="icon text-black">
-                                        <svg class="relative z-40 transform -rotate-90"
-                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                            <path d="M0 0h24v24H0z" fill="none"></path>
-                                            <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"></path>
-                                        </svg>
-                                    </button>
+                            <li class="nav-container has-child" aria-haspopup="true">
+                                <a href="#" class="nav-link">
+                                    <span>Categorieën</span>
+                                    <svg class="fill-current w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path d="M0 0h24v24H0V0z" fill="none"/>
+                                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6-6-6z"/>
+                                    </svg>
                                 </a>
-                                <div class="main-nav--constrain  ">
-                                    <div class="container">
-                                        <!-- back -->
-                                        <div class="main-nav--back flex h-14 items-center">
-                                            <a href="#" class="flex items-center h-full w-full">
-                                                <button class="icon text-black">
-                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                         viewBox="0 0 24 24">
-                                                        <path d="M0 0h24v24H0z" fill="none"></path>
-                                                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
+                                <div class="nav-constrain">
+                                    <div class="main-nav--content container">
+                                        <div class="row">
+                                            <div class="main-nav--back-container col-12">
+                                                <a href="#" class="mdc-typography--caption link">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px"
+                                                         viewBox="0 0 24 24" width="24px" fill="#000000">
+                                                        <path d="M0 0h24v24H0z" fill="none"/>
+                                                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
                                                     </svg>
-                                                </button>
-                                                <span class="text-black">Naar overzicht</span>
-                                            </a>
-                                        </div>
-                                        <!-- layout -->
-                                        <div class="main-nav--layout">
-                                            <div class="main-nav--item">
-                                                <ul class="sub-nav">
-                                                    <li class="sub-nav--item">
-                                                        <strong>Product
-                                                            kiezen</strong>
-                                                    </li>
+                                                    <span class="mdc-typography--caption">Naar overzicht</span>
+                                                </a>
+                                            </div>
+                                            <div class="main-nav--layout col-12 col-lg-4">
+                                                <div class="main-nav--item">
+                                                    <ul class="sub-nav">
+                                                        <li class="sub-nav--item">
+                                                            <strong
+                                                                    class="mdc-typography--caption">Muurdecoratie</strong>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto
+                                                                aluminium</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto op
+                                                                karton</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto op
+                                                                meerluik</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Poster met
+                                                                posterhanger</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto op
+                                                                wandcirkel</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="main-nav--item">
+                                                    <ul class="sub-nav">
+                                                        <li class="sub-nav--item">
+                                                            <strong class="mdc-typography--caption">Fotocollage</strong>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Squares
+                                                                collage</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Hexagon
+                                                                collage</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Glasblokken</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Ruitjes
+                                                                collage</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Alle
+                                                                fotocollage</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="main-nav--item">
+                                                    <ul class="sub-nav">
+                                                        <li class="sub-nav--item">
+                                                            <strong class="mdc-typography--caption">Buiten</strong>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Tuinposter met
+                                                                foto</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto op glas</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Hexagon
+                                                                (Muchopix)</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Tuincirkels</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Raamfolie</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
 
-
-                                                    <li class="sub-nav--item">
-                                                        <a href="#" class="font-light">Foto op
-                                                            meerluik</a>
-                                                    </li>
-
-                                                    <li class="sub-nav--item">
-                                                        <a href="#" class="font-light">Foto op
-                                                            wandcirkel</a>
-                                                    </li>
-                                                </ul>
+                                            <div class="main-nav--layout col-12 col-lg-4">
+                                                <div class="main-nav--item">
+                                                    <ul class="sub-nav">
+                                                        <li class="sub-nav--item">
+                                                            <strong class="mdc-typography--caption">Muurdecoratie
+                                                                collectie</strong>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto
+                                                                aluminium</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto op
+                                                                karton</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto op
+                                                                meerluik</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Poster met
+                                                                posterhanger</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto op
+                                                                wandcirkel</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="main-nav--item">
+                                                    <ul class="sub-nav">
+                                                        <li class="sub-nav--item">
+                                                            <strong class="mdc-typography--caption">Fotocollage</strong>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Squares
+                                                                collage</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Hexagon
+                                                                collage</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Glasblokken</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Ruitjes
+                                                                collage</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Alle
+                                                                fotocollage</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="main-nav--item">
+                                                    <ul class="sub-nav">
+                                                        <li class="sub-nav--item">
+                                                            <strong class="mdc-typography--caption">Buiten</strong>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Tuinposter met
+                                                                foto</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto op glas</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Hexagon
+                                                                (Muchopix)</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Tuincirkels</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Raamfolie</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="main-nav--layout col-12 col-lg-4">
+                                                <div class="main-nav--item">
+                                                    <ul class="sub-nav">
+                                                        <li class="sub-nav--item">
+                                                            <strong class="mdc-typography--caption">Muurdecoratie
+                                                                sss</strong>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto
+                                                                aluminium</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto op
+                                                                karton</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto op
+                                                                meerluik</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Poster met
+                                                                posterhanger</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto op
+                                                                wandcirkel</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="main-nav--item">
+                                                    <ul class="sub-nav">
+                                                        <li class="sub-nav--item">
+                                                            <strong class="mdc-typography--caption">Fotocollage</strong>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Squares
+                                                                collage</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Hexagon
+                                                                collage</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Glasblokken</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Ruitjes
+                                                                collage</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Alle
+                                                                fotocollage</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="main-nav--item">
+                                                    <ul class="sub-nav">
+                                                        <li class="sub-nav--item">
+                                                            <strong class="mdc-typography--caption">Buiten</strong>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Tuinposter met
+                                                                foto</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto op glas</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Hexagon
+                                                                (Muchopix)</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Tuincirkels</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Raamfolie</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
-
-                                        <div class="main-nav--layout">
-                                            <div class="main-nav--item">
-                                                <ul class="sub-nav">
-                                                    <li class="sub-nav--item">
-                                                        <strong>Muurdecoratie
-                                                            collectie</strong>
-                                                    </li>
-
-
-                                                    <li class="sub-nav--item">
-                                                        <a href="#" class="font-light">Foto op
-                                                            wandcirkel</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-
-                                        <div class="main-nav--layout">
-                                            <div class="main-nav--item">
-                                                <ul class="sub-nav">
-                                                    <li class="sub-nav--item">
-                                                        <strong>Muurdecoratie
-                                                            sss</strong>
-                                                    </li>
-
-
-                                                    <li class="sub-nav--item">
-                                                        <a href="#" class="font-light">Foto op
-                                                            meerluik</a>
-                                                    </li>
-                                                    <li class="sub-nav--item">
-                                                        <a href="#" class="font-light">Poster met
-                                                            posterhanger</a>
-                                                    </li>
-                                                    <li class="sub-nav--item">
-                                                        <a href="#" class="font-light">Foto op
-                                                            wandcirkel</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-
-                                            <div class="main-nav--item">
-                                                <ul class="sub-nav">
-                                                    <li class="sub-nav--item">
-                                                        <strong>Fotocollage</strong>
-                                                    </li>
-                                                    <li class="sub-nav--item">
-                                                        <a href="#" class="font-light">Squares
-                                                            collage</a>
-                                                    </li>
-                                                    <li class="sub-nav--item">
-                                                        <a href="#" class="font-light">Hexagon
-                                                            collage</a>
-                                                    </li>
-
-
-                                                </ul>
-                                            </div>
-                                        </div>
-
                                     </div>
                                 </div>
                             </li>
-                            <li class="main-nav--container has-child">
-                                <a href="#" class="main-nav--link">
-                                    <span class="relative z-40 text-black text-sm">Product kiezen</span>
-                                    <button class="icon text-black">
-                                        <svg class="relative z-40 transform -rotate-90"
-                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                            <path d="M0 0h24v24H0z" fill="none"></path>
-                                            <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"></path>
-                                        </svg>
-                                    </button>
+                            <li class="nav-container has-child" aria-haspopup="true">
+                                <a href="#" class="nav-link">
+                                    <span>Collecties</span>
+                                    <svg class="fill-current w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path d="M0 0h24v24H0V0z" fill="none"/>
+                                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6-6-6z"/>
+                                    </svg>
                                 </a>
-                                <div class="main-nav--constrain  ">
-                                    <div class="container">
-                                        <!-- back -->
-                                        <div class="main-nav--back flex h-14 items-center">
-                                            <a href="#" class="flex items-center h-full w-full">
-                                                <button class="icon text-black">
-                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                         viewBox="0 0 24 24">
-                                                        <path d="M0 0h24v24H0z" fill="none"></path>
-                                                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
+                                <div class="nav-constrain">
+                                    <div class="main-nav--content container">
+                                        <div class="row">
+                                            <div class="main-nav--back-container col-12">
+                                                <a href="#" class="mdc-typography--caption link">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px"
+                                                         viewBox="0 0 24 24" width="24px" fill="#000000">
+                                                        <path d="M0 0h24v24H0z" fill="none"/>
+                                                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
                                                     </svg>
-                                                </button>
-                                                <span class="text-black">Naar overzicht</span>
-                                            </a>
-                                        </div>
-                                        <!-- layout -->
-                                        <div class="main-nav--layout">
-                                            <div class="main-nav--item">
-                                                <ul class="sub-nav">
-                                                    <li class="sub-nav--item">
-                                                        <strong>Product
-                                                            kiezen</strong>
-                                                    </li>
-
-
-                                                    <li class="sub-nav--item">
-                                                        <a href="#" class="font-light">Foto op
-                                                            meerluik</a>
-                                                    </li>
-
-                                                    <li class="sub-nav--item">
-                                                        <a href="#" class="font-light">Foto op
-                                                            wandcirkel</a>
-                                                    </li>
-                                                </ul>
+                                                    <span class="mdc-typography--caption">Naar overzicht</span>
+                                                </a>
                                             </div>
-                                        </div>
-
-                                        <div class="main-nav--layout">
-                                            <div class="main-nav--item">
-                                                <ul class="sub-nav">
-                                                    <li class="sub-nav--item">
-                                                        <strong>Muurdecoratie
-                                                            collectie</strong>
-                                                    </li>
-
-
-                                                    <li class="sub-nav--item">
-                                                        <a href="#" class="font-light">Foto op
-                                                            wandcirkel</a>
-                                                    </li>
-                                                </ul>
+                                            <div class="main-nav--layout col-12 col-lg-3">
+                                                <div class="main-nav--item">
+                                                    <ul class="sub-nav">
+                                                        <li class="sub-nav--item">
+                                                            <strong class="mdc-typography--caption">Collectie</strong>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto
+                                                                aluminium</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto op
+                                                                karton</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto op
+                                                                meerluik</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Poster met
+                                                                posterhanger</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto op
+                                                                wandcirkel</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="main-nav--item">
+                                                    <ul class="sub-nav">
+                                                        <li class="sub-nav--item">
+                                                            <strong class="mdc-typography--caption">Fotocollage</strong>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Squares
+                                                                collage</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Hexagon
+                                                                collage</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Glasblokken</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Ruitjes
+                                                                collage</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Alle
+                                                                fotocollage</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="main-nav--item">
+                                                    <ul class="sub-nav">
+                                                        <li class="sub-nav--item">
+                                                            <strong class="mdc-typography--caption">Buiten</strong>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Tuinposter met
+                                                                foto</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto op glas</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Hexagon
+                                                                (Muchopix)</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Tuincirkels</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Raamfolie</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="main-nav--layout">
-                                            <div class="main-nav--item">
-                                                <ul class="sub-nav">
-                                                    <li class="sub-nav--item">
-                                                        <strong>Muurdecoratie
-                                                            sss</strong>
-                                                    </li>
-
-
-                                                    <li class="sub-nav--item">
-                                                        <a href="#" class="font-light">Foto op
-                                                            meerluik</a>
-                                                    </li>
-                                                    <li class="sub-nav--item">
-                                                        <a href="#" class="font-light">Poster met
-                                                            posterhanger</a>
-                                                    </li>
-                                                    <li class="sub-nav--item">
-                                                        <a href="#" class="font-light">Foto op
-                                                            wandcirkel</a>
-                                                    </li>
-                                                </ul>
+                                            <div class="main-nav--layout col-12 col-lg-3">
+                                                <div class="main-nav--item">
+                                                    <ul class="sub-nav">
+                                                        <li class="sub-nav--item">
+                                                            <strong
+                                                                    class="mdc-typography--caption">Muurdecoratie</strong>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto
+                                                                aluminium</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto op
+                                                                karton</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto op
+                                                                meerluik</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Poster met
+                                                                posterhanger</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto op
+                                                                wandcirkel</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="main-nav--item">
+                                                    <ul class="sub-nav">
+                                                        <li class="sub-nav--item">
+                                                            <strong class="mdc-typography--caption">Fotocollage</strong>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Squares
+                                                                collage</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Hexagon
+                                                                collage</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Glasblokken</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Ruitjes
+                                                                collage</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Alle
+                                                                fotocollage</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="main-nav--item">
+                                                    <ul class="sub-nav">
+                                                        <li class="sub-nav--item">
+                                                            <strong class="mdc-typography--caption">Buiten</strong>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Tuinposter met
+                                                                foto</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto op glas</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Hexagon
+                                                                (Muchopix)</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Tuincirkels</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Raamfolie</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="main-nav--layout col-12 col-lg-3">
+                                                <div class="main-nav--item">
+                                                    <ul class="sub-nav">
+                                                        <li class="sub-nav--item">
+                                                            <strong
+                                                                    class="mdc-typography--caption">Muurdecoratie</strong>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto
+                                                                aluminium</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto op
+                                                                karton</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto op
+                                                                meerluik</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Poster met
+                                                                posterhanger</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto op
+                                                                wandcirkel</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto op
+                                                                karton</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto op
+                                                                meerluik</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto op
+                                                                karton</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto op
+                                                                meerluik</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="main-nav--item">
+                                                    <ul class="sub-nav">
+                                                        <li class="sub-nav--item">
+                                                            <strong class="mdc-typography--caption">Fotocollage</strong>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Squares
+                                                                collage</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Hexagon
+                                                                collage</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Glasblokken</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Ruitjes
+                                                                collage</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Alle
+                                                                fotocollage</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="main-nav--layout col-12 col-lg-3">
+                                                <div class="main-nav--item">
+                                                    <ul class="sub-nav">
+                                                        <li class="sub-nav--item">
+                                                            <strong class="mdc-typography--caption">Muurdecoratie
+                                                                collectie</strong>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto
+                                                                aluminium</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto op
+                                                                karton</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto op
+                                                                meerluik</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Poster met
+                                                                posterhanger</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto op
+                                                                wandcirkel</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto op
+                                                                karton</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto op
+                                                                meerluik</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto op
+                                                                karton</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Foto op
+                                                                meerluik</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="main-nav--item">
+                                                    <ul class="sub-nav">
+                                                        <li class="sub-nav--item">
+                                                            <strong class="mdc-typography--caption">Fotocollage</strong>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Squares
+                                                                collage</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Hexagon
+                                                                collage</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Glasblokken</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Ruitjes
+                                                                collage</a>
+                                                        </li>
+                                                        <li class="sub-nav--item">
+                                                            <a href="#" class="mdc-typography--caption">Alle
+                                                                fotocollage</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </div>
 
-                                            <div class="main-nav--item">
-                                                <ul class="sub-nav">
-                                                    <li class="sub-nav--item">
-                                                        <strong>Fotocollage</strong>
-                                                    </li>
-                                                    <li class="sub-nav--item">
-                                                        <a href="#" class="font-light">Squares
-                                                            collage</a>
-                                                    </li>
-                                                    <li class="sub-nav--item">
-                                                        <a href="#" class="font-light">Hexagon
-                                                            collage</a>
-                                                    </li>
-
-
-                                                </ul>
-                                            </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </li>
@@ -524,31 +1024,34 @@
 
                         <ul class="secondary-nav">
                             <li class="secondary-nav--container">
-                                <a href="#" class="secondary-nav--link font-light">
+                                <a href="#" class="secondary-nav--link mdc-typography--caption">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24"
                                          width="24px" fill="#000000">
-                                        <path d="M0 0h24v24H0V0z" fill="none"></path>
-                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM7.07 18.28c.43-.9 3.05-1.78 4.93-1.78s4.51.88 4.93 1.78C15.57 19.36 13.86 20 12 20s-3.57-.64-4.93-1.72zm11.29-1.45c-1.43-1.74-4.9-2.33-6.36-2.33s-4.93.59-6.36 2.33C4.62 15.49 4 13.82 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8c0 1.82-.62 3.49-1.64 4.83zM12 6c-1.94 0-3.5 1.56-3.5 3.5S10.06 13 12 13s3.5-1.56 3.5-3.5S13.94 6 12 6zm0 5c-.83 0-1.5-.67-1.5-1.5S11.17 8 12 8s1.5.67 1.5 1.5S12.83 11 12 11z"></path>
+                                        <path d="M0 0h24v24H0V0z" fill="none"/>
+                                        <path
+                                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM7.07 18.28c.43-.9 3.05-1.78 4.93-1.78s4.51.88 4.93 1.78C15.57 19.36 13.86 20 12 20s-3.57-.64-4.93-1.72zm11.29-1.45c-1.43-1.74-4.9-2.33-6.36-2.33s-4.93.59-6.36 2.33C4.62 15.49 4 13.82 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8c0 1.82-.62 3.49-1.64 4.83zM12 6c-1.94 0-3.5 1.56-3.5 3.5S10.06 13 12 13s3.5-1.56 3.5-3.5S13.94 6 12 6zm0 5c-.83 0-1.5-.67-1.5-1.5S11.17 8 12 8s1.5.67 1.5 1.5S12.83 11 12 11z"/>
                                     </svg>
-                                    <span class="text-black text-sm">Mijn account</span>
+                                    <span>Mijn account</span>
                                 </a>
                             </li>
                             <li class="secondary-nav--container">
-                                <a href="#" class="secondary-nav--link font-light">
+                                <a href="#" class="secondary-nav--link mdc-typography--caption">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24"
                                          width="24px" fill="#000000">
-                                        <path d="M0 0h24v24H0V0z" fill="none"></path>
-                                        <path d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"></path>
+                                        <path d="M0 0h24v24H0V0z" fill="none"/>
+                                        <path
+                                                d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"/>
                                     </svg>
                                     <span>Veelgestelde vragen</span>
                                 </a>
                             </li>
                             <li class="secondary-nav--container">
-                                <a href="#" class="secondary-nav--link font-light">
+                                <a href="#" class="secondary-nav--link mdc-typography--caption">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24"
                                          width="24px" fill="#000000">
-                                        <path d="M0 0h24v24H0V0z" fill="none"></path>
-                                        <path d="M20 7h-4V5l-2-2h-4L8 5v2H4c-1.1 0-2 .9-2 2v5c0 .75.4 1.38 1 1.73V19c0 1.11.89 2 2 2h14c1.11 0 2-.89 2-2v-3.28c.59-.35 1-.99 1-1.72V9c0-1.1-.9-2-2-2zM10 5h4v2h-4V5zM4 9h16v5h-5v-3H9v3H4V9zm9 6h-2v-2h2v2zm6 4H5v-3h4v1h6v-1h4v3z"></path>
+                                        <path d="M0 0h24v24H0V0z" fill="none"/>
+                                        <path
+                                                d="M20 7h-4V5l-2-2h-4L8 5v2H4c-1.1 0-2 .9-2 2v5c0 .75.4 1.38 1 1.73V19c0 1.11.89 2 2 2h14c1.11 0 2-.89 2-2v-3.28c.59-.35 1-.99 1-1.72V9c0-1.1-.9-2-2-2zM10 5h4v2h-4V5zM4 9h16v5h-5v-3H9v3H4V9zm9 6h-2v-2h2v2zm6 4H5v-3h4v1h6v-1h4v3z"/>
                                     </svg>
                                     <span>Zakelijk</span>
                                 </a>
@@ -559,11 +1062,10 @@
             </div>
         </div>
     </div>
-
-    <!--<div class="main-menu-overlay       active"></div>-->
     <div class="main-menu-overlay"></div>
 </header>
 
+<!--main-->
 <main class="mt-44 md:mt-32">
     <!--Resolve "Footer: Implementatie Link blokken"-->
     <section class="section-links mb-6 hidden">
@@ -641,526 +1143,549 @@
         </div>
     </section>
 
-    <!--project new-->
-    <section class="section-accordion" id="section-accordion">
+    <!--accordion new-->
+    <script>
+        function initAccordion() {
+            return {
+                open: false,
+                md: '768px',
+                media: function (target) {
+                    if (window.matchMedia("(min-width:" + this.md + ")").matches) {
+                        this.open = true;
+                        target.accordionBody.style.maxHeight = target.accordionBody.scrollHeight + "px";
+                    }
+                },
+                scrollHeight: function (target) {
+                    this.open = !this.open;
+                    if(this.open) {
+                        target.accordionBody.style.maxHeight = target.accordionBody.scrollHeight + "px";
+                    }else {
+                        target.accordionBody.style.maxHeight = null;
+                    }
+                }
+            };
+        }
+    </script>
+
+    <section class="section-accordion hidden" id="section-accordion">
         <div class="container">
             <!--title-->
-            <h3 class="text-xl font-bold mb-4">Ontdek alles bij FotoOpAluminium.nl</h3>
+            <h3 class="text-xl font-bold mb-4 mt-4">Ontdek alles bij FotoOpAluminium.nl</h3>
             <!-- footer navigation -->
             <div class="footer-nav md:flex">
                 <!--new column-->
                 <ul class="accordion flex-1 md:pr-4"><!--first column-->
-                    <li class="accordion-list md:mb-5" x-data="{ open: false }">
+                    <li class="accordion-list md:mb-5" x-data="initAccordion()" x-init="media($refs)">
                         <!--accordion header-->
-                        <div class="accordion-list-title" tabindex="0" @click="open = !open">
-                            <strong class="text-base">Foto op aluminium</strong>
+                        <div class="accordion-list-title md:pointer-events-none	md:cursor-default" tabindex="0" @click="scrollHeight($refs)">
+                            <strong class="text-sm">Foto op aluminium</strong>
                             <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
-                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
+                        </span>
                             <span class="expand_more absolute right-0 md:hidden" aria-hidden="true" x-show="open">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
-                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
+                        </span>
                         </div>
                         <!--accordion body-->
-                        <span class="accordion-list-content max-h-0" x-bind:class="open ? 'max-h-infinite' : ''">
-                            <ul class="accordion-list-content--navigation-group">
-                                <li class="accordion-list-content--item mb-2">
-                                    <div class="image-container hidden">
-                                        <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
-                                    </div>
-                                    <div class="link-container">
-                                        <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
-                                    </div>
-                                </li>
-                                <li class="accordion-list-content--item mb-2">
-                                    <div class="image-container hidden">
-                                        <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
-                                    </div>
-                                    <div class="link-container">
-                                        <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
-                                    </div>
-                                </li>
-                                <li class="accordion-list-content--item mb-2">
-                                    <div class="image-container hidden">
-                                        <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
-                                    </div>
-                                    <div class="link-container">
-                                        <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </span>
+                        <span class="accordion-list-content max-h-0" x-ref="accordionBody">
+                        <ul class="accordion-list-content--navigation-group">
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
+                                </div>
+                            </li>
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
+                                </div>
+                            </li>
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </span>
                     </li>
                     <li role="separator" class="separator"></li>
-                    <li class="accordion-list md:mb-5" x-data="{ open: false }">
+                    <li class="accordion-list md:mb-5" x-data="initAccordion()" x-init="media($refs)">
                         <!--accordion header-->
-                        <div class="accordion-list-title" tabindex="0" @click="open = !open">
-                            <strong class="text-base">Foto op aluminium</strong>
+                        <div class="accordion-list-title md:pointer-events-none	md:cursor-default" tabindex="0" @click="scrollHeight($refs)">
+                            <strong class="text-sm">Foto op aluminium</strong>
                             <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
-                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
+                        </span>
                             <span class="expand_more absolute right-0 md:hidden" aria-hidden="true" x-show="open">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
-                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
+                        </span>
                         </div>
                         <!--accordion body-->
-                        <span class="accordion-list-content max-h-0" x-bind:class="open ? 'max-h-infinite' : ''">
-                            <ul class="accordion-list-content--navigation-group">
-                                <li class="accordion-list-content--item mb-2">
-                                    <div class="image-container hidden">
-                                        <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
-                                    </div>
-                                    <div class="link-container">
-                                        <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
-                                    </div>
-                                </li>
-                                <li class="accordion-list-content--item mb-2">
-                                    <div class="image-container hidden">
-                                        <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
-                                    </div>
-                                    <div class="link-container">
-                                        <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
-                                    </div>
-                                </li>
-                                <li class="accordion-list-content--item mb-2">
-                                    <div class="image-container hidden">
-                                        <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
-                                    </div>
-                                    <div class="link-container">
-                                        <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </span>
+                        <span class="accordion-list-content max-h-0" x-ref="accordionBody">
+                        <ul class="accordion-list-content--navigation-group">
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
+                                </div>
+                            </li>
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
+                                </div>
+                            </li>
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </span>
                     </li>
                     <li role="separator" class="separator"></li>
-                    <li class="accordion-list md:mb-5" x-data="{ open: false }">
+                    <li class="accordion-list md:mb-5" x-data="initAccordion()" x-init="media($refs)">
                         <!--accordion header-->
-                        <div class="accordion-list-title" tabindex="0" @click="open = !open">
-                            <strong class="text-base">Foto op aluminium</strong>
+                        <div class="accordion-list-title md:pointer-events-none	md:cursor-default" tabindex="0" @click="scrollHeight($refs)">
+                            <strong class="text-sm">Foto op aluminium</strong>
                             <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
-                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
+                        </span>
                             <span class="expand_more absolute right-0 md:hidden" aria-hidden="true" x-show="open">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
-                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
+                        </span>
                         </div>
                         <!--accordion body-->
-                        <span class="accordion-list-content max-h-0" x-bind:class="open ? 'max-h-infinite' : ''">
-                            <ul class="accordion-list-content--navigation-group">
-                                <li class="accordion-list-content--item mb-2">
-                                    <div class="image-container hidden">
-                                        <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
-                                    </div>
-                                    <div class="link-container">
-                                        <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
-                                    </div>
-                                </li>
-                                <li class="accordion-list-content--item mb-2">
-                                    <div class="image-container hidden">
-                                        <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
-                                    </div>
-                                    <div class="link-container">
-                                        <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
-                                    </div>
-                                </li>
-                                <li class="accordion-list-content--item mb-2">
-                                    <div class="image-container hidden">
-                                        <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
-                                    </div>
-                                    <div class="link-container">
-                                        <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </span>
-                    </li>
-                    <li role="separator" class="separator"></li>
-                </ul>
-                <!--new column-->
-                <ul class="accordion flex-1 md:pr-4"><!--first column-->
-                    <li class="accordion-list md:mb-5" x-data="{ open: false }">
-                        <!--accordion header-->
-                        <div class="accordion-list-title" tabindex="0" @click="open = !open">
-                            <strong class="text-base">Foto op aluminium</strong>
-                            <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
-                            </span>
-                            <span class="expand_more absolute right-0 md:hidden" aria-hidden="true" x-show="open">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
-                            </span>
-                        </div>
-                        <!--accordion body-->
-                        <span class="accordion-list-content max-h-0" x-bind:class="open ? 'max-h-infinite' : ''">
-                            <ul class="accordion-list-content--navigation-group">
-                                <li class="accordion-list-content--item mb-2">
-                                    <div class="image-container hidden">
-                                        <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
-                                    </div>
-                                    <div class="link-container">
-                                        <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
-                                    </div>
-                                </li>
-                                <li class="accordion-list-content--item mb-2">
-                                    <div class="image-container hidden">
-                                        <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
-                                    </div>
-                                    <div class="link-container">
-                                        <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
-                                    </div>
-                                </li>
-                                <li class="accordion-list-content--item mb-2">
-                                    <div class="image-container hidden">
-                                        <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
-                                    </div>
-                                    <div class="link-container">
-                                        <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </span>
-                    </li>
-                    <li role="separator" class="separator"></li>
-                    <li class="accordion-list md:mb-5" x-data="{ open: false }">
-                        <!--accordion header-->
-                        <div class="accordion-list-title" tabindex="0" @click="open = !open">
-                            <strong class="text-base">Foto op aluminium</strong>
-                            <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
-                            </span>
-                            <span class="expand_more absolute right-0 md:hidden" aria-hidden="true" x-show="open">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
-                            </span>
-                        </div>
-                        <!--accordion body-->
-                        <span class="accordion-list-content max-h-0" x-bind:class="open ? 'max-h-infinite' : ''">
-                            <ul class="accordion-list-content--navigation-group">
-                                <li class="accordion-list-content--item mb-2">
-                                    <div class="image-container hidden">
-                                        <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
-                                    </div>
-                                    <div class="link-container">
-                                        <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
-                                    </div>
-                                </li>
-                                <li class="accordion-list-content--item mb-2">
-                                    <div class="image-container hidden">
-                                        <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
-                                    </div>
-                                    <div class="link-container">
-                                        <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
-                                    </div>
-                                </li>
-                                <li class="accordion-list-content--item mb-2">
-                                    <div class="image-container hidden">
-                                        <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
-                                    </div>
-                                    <div class="link-container">
-                                        <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </span>
-                    </li>
-                    <li role="separator" class="separator"></li>
-                    <li class="accordion-list md:mb-5" x-data="{ open: false }">
-                        <!--accordion header-->
-                        <div class="accordion-list-title" tabindex="0" @click="open = !open">
-                            <strong class="text-base">Foto op aluminium</strong>
-                            <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
-                            </span>
-                            <span class="expand_more absolute right-0 md:hidden" aria-hidden="true" x-show="open">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
-                            </span>
-                        </div>
-                        <!--accordion body-->
-                        <span class="accordion-list-content max-h-0" x-bind:class="open ? 'max-h-infinite' : ''">
-                            <ul class="accordion-list-content--navigation-group">
-                                <li class="accordion-list-content--item mb-2">
-                                    <div class="image-container hidden">
-                                        <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
-                                    </div>
-                                    <div class="link-container">
-                                        <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
-                                    </div>
-                                </li>
-                                <li class="accordion-list-content--item mb-2">
-                                    <div class="image-container hidden">
-                                        <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
-                                    </div>
-                                    <div class="link-container">
-                                        <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
-                                    </div>
-                                </li>
-                                <li class="accordion-list-content--item mb-2">
-                                    <div class="image-container hidden">
-                                        <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
-                                    </div>
-                                    <div class="link-container">
-                                        <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </span>
+                        <span class="accordion-list-content max-h-0" x-ref="accordionBody">
+                        <ul class="accordion-list-content--navigation-group">
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
+                                </div>
+                            </li>
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
+                                </div>
+                            </li>
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </span>
                     </li>
                     <li role="separator" class="separator"></li>
                 </ul>
                 <!--new column-->
                 <ul class="accordion flex-1 md:pr-4"><!--first column-->
-                    <li class="accordion-list md:mb-5" x-data="{ open: false }">
+                    <li class="accordion-list md:mb-5" x-data="initAccordion()" x-init="media($refs)">
                         <!--accordion header-->
-                        <div class="accordion-list-title" tabindex="0" @click="open = !open">
-                            <strong class="text-base">Foto op aluminium</strong>
+                        <div class="accordion-list-title md:pointer-events-none	md:cursor-default" tabindex="0" @click="scrollHeight($refs)">
+                            <strong class="text-sm">Foto op aluminium</strong>
                             <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
-                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
+                        </span>
                             <span class="expand_more absolute right-0 md:hidden" aria-hidden="true" x-show="open">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
-                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
+                        </span>
                         </div>
                         <!--accordion body-->
-                        <span class="accordion-list-content max-h-0" x-bind:class="open ? 'max-h-infinite' : ''">
-                            <ul class="accordion-list-content--navigation-group">
-                                <li class="accordion-list-content--item mb-2">
-                                    <div class="image-container hidden">
-                                        <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
-                                    </div>
-                                    <div class="link-container">
-                                        <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
-                                    </div>
-                                </li>
-                                <li class="accordion-list-content--item mb-2">
-                                    <div class="image-container hidden">
-                                        <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
-                                    </div>
-                                    <div class="link-container">
-                                        <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
-                                    </div>
-                                </li>
-                                <li class="accordion-list-content--item mb-2">
-                                    <div class="image-container hidden">
-                                        <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
-                                    </div>
-                                    <div class="link-container">
-                                        <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </span>
+                        <span class="accordion-list-content max-h-0" x-ref="accordionBody">
+                        <ul class="accordion-list-content--navigation-group">
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
+                                </div>
+                            </li>
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
+                                </div>
+                            </li>
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </span>
                     </li>
                     <li role="separator" class="separator"></li>
-                    <li class="accordion-list md:mb-5" x-data="{ open: false }">
+                    <li class="accordion-list md:mb-5" x-data="initAccordion()" x-init="media($refs)">
                         <!--accordion header-->
-                        <div class="accordion-list-title" tabindex="0" @click="open = !open">
-                            <strong class="text-base">Foto op aluminium</strong>
+                        <div class="accordion-list-title md:pointer-events-none	md:cursor-default" tabindex="0" @click="scrollHeight($refs)">
+                            <strong class="text-sm">Foto op aluminium</strong>
                             <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
-                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
+                        </span>
                             <span class="expand_more absolute right-0 md:hidden" aria-hidden="true" x-show="open">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
-                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
+                        </span>
                         </div>
                         <!--accordion body-->
-                        <span class="accordion-list-content max-h-0" x-bind:class="open ? 'max-h-infinite' : ''">
-                            <ul class="accordion-list-content--navigation-group">
-                                <li class="accordion-list-content--item mb-2">
-                                    <div class="image-container hidden">
-                                        <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
-                                    </div>
-                                    <div class="link-container">
-                                        <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
-                                    </div>
-                                </li>
-                                <li class="accordion-list-content--item mb-2">
-                                    <div class="image-container hidden">
-                                        <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
-                                    </div>
-                                    <div class="link-container">
-                                        <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
-                                    </div>
-                                </li>
-                                <li class="accordion-list-content--item mb-2">
-                                    <div class="image-container hidden">
-                                        <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
-                                    </div>
-                                    <div class="link-container">
-                                        <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </span>
+                        <span class="accordion-list-content max-h-0" x-ref="accordionBody">
+                        <ul class="accordion-list-content--navigation-group">
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
+                                </div>
+                            </li>
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
+                                </div>
+                            </li>
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </span>
                     </li>
                     <li role="separator" class="separator"></li>
-                    <li class="accordion-list md:mb-5" x-data="{ open: false }">
+                    <li class="accordion-list md:mb-5" x-data="initAccordion()" x-init="media($refs)">
                         <!--accordion header-->
-                        <div class="accordion-list-title" tabindex="0" @click="open = !open">
-                            <strong class="text-base">Foto op aluminium</strong>
+                        <div class="accordion-list-title md:pointer-events-none	md:cursor-default" tabindex="0" @click="scrollHeight($refs)">
+                            <strong class="text-sm">Foto op aluminium</strong>
                             <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
-                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
+                        </span>
                             <span class="expand_more absolute right-0 md:hidden" aria-hidden="true" x-show="open">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
-                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
+                        </span>
                         </div>
                         <!--accordion body-->
-                        <span class="accordion-list-content max-h-0" x-bind:class="open ? 'max-h-infinite' : ''">
-                            <ul class="accordion-list-content--navigation-group">
-                                <li class="accordion-list-content--item mb-2">
-                                    <div class="image-container hidden">
-                                        <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
-                                    </div>
-                                    <div class="link-container">
-                                        <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
-                                    </div>
-                                </li>
-                                <li class="accordion-list-content--item mb-2">
-                                    <div class="image-container hidden">
-                                        <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
-                                    </div>
-                                    <div class="link-container">
-                                        <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
-                                    </div>
-                                </li>
-                                <li class="accordion-list-content--item mb-2">
-                                    <div class="image-container hidden">
-                                        <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
-                                    </div>
-                                    <div class="link-container">
-                                        <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </span>
+                        <span class="accordion-list-content max-h-0" x-ref="accordionBody">
+                        <ul class="accordion-list-content--navigation-group">
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
+                                </div>
+                            </li>
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
+                                </div>
+                            </li>
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </span>
                     </li>
                     <li role="separator" class="separator"></li>
                 </ul>
                 <!--new column-->
                 <ul class="accordion flex-1 md:pr-4"><!--first column-->
-                    <li class="accordion-list md:mb-5" x-data="{ open: false }">
+                    <li class="accordion-list md:mb-5" x-data="initAccordion()" x-init="media($refs)">
                         <!--accordion header-->
-                        <div class="accordion-list-title" tabindex="0" @click="open = !open">
-                            <strong class="text-base">Foto op aluminium</strong>
+                        <div class="accordion-list-title md:pointer-events-none	md:cursor-default" tabindex="0" @click="scrollHeight($refs)">
+                            <strong class="text-sm">Foto op aluminium</strong>
                             <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
-                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
+                        </span>
                             <span class="expand_more absolute right-0 md:hidden" aria-hidden="true" x-show="open">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
-                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
+                        </span>
                         </div>
                         <!--accordion body-->
-                        <span class="accordion-list-content max-h-0" x-bind:class="open ? 'max-h-infinite' : ''">
-                            <ul class="accordion-list-content--navigation-group">
-                                <li class="accordion-list-content--item mb-2">
-                                    <div class="image-container hidden">
-                                        <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
-                                    </div>
-                                    <div class="link-container">
-                                        <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
-                                    </div>
-                                </li>
-                                <li class="accordion-list-content--item mb-2">
-                                    <div class="image-container hidden">
-                                        <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
-                                    </div>
-                                    <div class="link-container">
-                                        <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
-                                    </div>
-                                </li>
-                                <li class="accordion-list-content--item mb-2">
-                                    <div class="image-container hidden">
-                                        <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
-                                    </div>
-                                    <div class="link-container">
-                                        <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </span>
+                        <span class="accordion-list-content max-h-0" x-ref="accordionBody">
+                        <ul class="accordion-list-content--navigation-group">
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
+                                </div>
+                            </li>
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
+                                </div>
+                            </li>
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </span>
                     </li>
                     <li role="separator" class="separator"></li>
-                    <li class="accordion-list md:mb-5" x-data="{ open: false }">
+                    <li class="accordion-list md:mb-5" x-data="initAccordion()" x-init="media($refs)">
                         <!--accordion header-->
-                        <div class="accordion-list-title" tabindex="0" @click="open = !open">
-                            <strong class="text-base">Foto op aluminium</strong>
+                        <div class="accordion-list-title md:pointer-events-none	md:cursor-default" tabindex="0" @click="scrollHeight($refs)">
+                            <strong class="text-sm">Foto op aluminium</strong>
                             <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
-                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
+                        </span>
                             <span class="expand_more absolute right-0 md:hidden" aria-hidden="true" x-show="open">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
-                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
+                        </span>
                         </div>
                         <!--accordion body-->
-                        <span class="accordion-list-content max-h-0" x-bind:class="open ? 'max-h-infinite' : ''">
-                            <ul class="accordion-list-content--navigation-group">
-                                <li class="accordion-list-content--item mb-2">
-                                    <div class="image-container hidden">
-                                        <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
-                                    </div>
-                                    <div class="link-container">
-                                        <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
-                                    </div>
-                                </li>
-                                <li class="accordion-list-content--item mb-2">
-                                    <div class="image-container hidden">
-                                        <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
-                                    </div>
-                                    <div class="link-container">
-                                        <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
-                                    </div>
-                                </li>
-                                <li class="accordion-list-content--item mb-2">
-                                    <div class="image-container hidden">
-                                        <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
-                                    </div>
-                                    <div class="link-container">
-                                        <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </span>
+                        <span class="accordion-list-content max-h-0" x-ref="accordionBody">
+                        <ul class="accordion-list-content--navigation-group">
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
+                                </div>
+                            </li>
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
+                                </div>
+                            </li>
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </span>
                     </li>
                     <li role="separator" class="separator"></li>
-                    <li class="accordion-list md:mb-5" x-data="{ open: false }">
+                    <li class="accordion-list md:mb-5" x-data="initAccordion()" x-init="media($refs)">
                         <!--accordion header-->
-                        <div class="accordion-list-title" tabindex="0" @click="open = !open">
-                            <strong class="text-base">Foto op aluminium</strong>
+                        <div class="accordion-list-title md:pointer-events-none	md:cursor-default" tabindex="0" @click="scrollHeight($refs)">
+                            <strong class="text-sm">Foto op aluminium</strong>
                             <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
-                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
+                        </span>
                             <span class="expand_more absolute right-0 md:hidden" aria-hidden="true" x-show="open">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
-                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
+                        </span>
                         </div>
                         <!--accordion body-->
-                        <span class="accordion-list-content max-h-0" x-bind:class="open ? 'max-h-infinite' : ''">
-                            <ul class="accordion-list-content--navigation-group">
-                                <li class="accordion-list-content--item mb-2">
-                                    <div class="image-container hidden">
-                                        <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
-                                    </div>
-                                    <div class="link-container">
-                                        <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
-                                    </div>
-                                </li>
-                                <li class="accordion-list-content--item mb-2">
-                                    <div class="image-container hidden">
-                                        <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
-                                    </div>
-                                    <div class="link-container">
-                                        <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
-                                    </div>
-                                </li>
-                                <li class="accordion-list-content--item mb-2">
-                                    <div class="image-container hidden">
-                                        <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
-                                    </div>
-                                    <div class="link-container">
-                                        <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
-                                    </div>
-                                </li>
-                            </ul>
+                        <span class="accordion-list-content max-h-0" x-ref="accordionBody">
+                        <ul class="accordion-list-content--navigation-group">
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
+                                </div>
+                            </li>
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
+                                </div>
+                            </li>
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </span>
+                    </li>
+                    <li role="separator" class="separator"></li>
+                </ul>
+                <!--new column-->
+                <ul class="accordion flex-1 md:pr-4"><!--first column-->
+                    <li class="accordion-list md:mb-5" x-data="initAccordion()" x-init="media($refs)">
+                        <!--accordion header-->
+                        <div class="accordion-list-title md:pointer-events-none	md:cursor-default" tabindex="0" @click="scrollHeight($refs)">
+                            <strong class="text-sm">Foto op aluminium</strong>
+                            <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
                         </span>
+                            <span class="expand_more absolute right-0 md:hidden" aria-hidden="true" x-show="open">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
+                        </span>
+                        </div>
+                        <!--accordion body-->
+                        <span class="accordion-list-content max-h-0" x-ref="accordionBody">
+                        <ul class="accordion-list-content--navigation-group">
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
+                                </div>
+                            </li>
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
+                                </div>
+                            </li>
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </span>
+                    </li>
+                    <li role="separator" class="separator"></li>
+                    <li class="accordion-list md:mb-5" x-data="initAccordion()" x-init="media($refs)">
+                        <!--accordion header-->
+                        <div class="accordion-list-title md:pointer-events-none	md:cursor-default" tabindex="0" @click="scrollHeight($refs)">
+                            <strong class="text-sm">Foto op aluminium</strong>
+                            <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
+                        </span>
+                            <span class="expand_more absolute right-0 md:hidden" aria-hidden="true" x-show="open">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
+                        </span>
+                        </div>
+                        <!--accordion body-->
+                        <span class="accordion-list-content max-h-0" x-ref="accordionBody">
+                        <ul class="accordion-list-content--navigation-group">
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
+                                </div>
+                            </li>
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
+                                </div>
+                            </li>
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </span>
+                    </li>
+                    <li role="separator" class="separator"></li>
+                    <li class="accordion-list md:mb-5" x-data="initAccordion()" x-init="media($refs)">
+                        <!--accordion header-->
+                        <div class="accordion-list-title md:pointer-events-none	md:cursor-default" tabindex="0" @click="scrollHeight($refs)">
+                            <strong class="text-sm">Foto op aluminium</strong>
+                            <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
+                        </span>
+                            <span class="expand_more absolute right-0 md:hidden" aria-hidden="true" x-show="open">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
+                        </span>
+                        </div>
+                        <!--accordion body-->
+                        <span class="accordion-list-content max-h-0" x-ref="accordionBody">
+                        <ul class="accordion-list-content--navigation-group">
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
+                                </div>
+                            </li>
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
+                                </div>
+                            </li>
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </span>
                     </li>
                     <li role="separator" class="separator"></li>
                 </ul>
@@ -1169,8 +1694,8 @@
 
         </div>
     </section>
-</main>
 
+</main>
 
 </body>
 </html>

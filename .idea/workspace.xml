@@ -2,14 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d5a5026e-f1b7-4cc6-972b-fc60d790e2f9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/scss/components/footer-link/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tailwindcss.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/tailwindcss.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/types.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/tailwind.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scss/components/header.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/scss/components/header.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scss/components/icon.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/scss/components/icon.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scss/components/main-menu.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/scss/components/main-menu.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scss/components/text-field.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/scss/components/text-field.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +45,7 @@
     <setting file="file://$PROJECT_DIR$/tailwind.config.js" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/node_modules/alpinejs/src/alpine.js" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/scss/components/icon.css" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/types.d.ts" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/postcss-tailwind.config.js" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/scss/components/text-field.css" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/ts/textField/index.ts" root0="FORCE_HIGHLIGHTING" />
@@ -54,6 +54,7 @@
     <setting file="file://$PROJECT_DIR$/src/scss/components/header.css" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/tailwindcss.ts" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/node_modules/alpinejs/builds/module.js" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/scss/components/footer-link/index.css" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/index.ts" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1tcBVT6n8y8LoS3nvZqKLMLU735" />
@@ -129,7 +130,19 @@
       <workItem from="1626159115743" duration="667000" />
       <workItem from="1626245479336" duration="588000" />
       <workItem from="1626683231000" duration="22880000" />
-      <workItem from="1626723962782" duration="2147000" />
+      <workItem from="1626723962782" duration="3867000" />
+      <workItem from="1626764154499" duration="1871000" />
+      <workItem from="1626813630093" duration="636000" />
+      <workItem from="1626817203323" duration="622000" />
+      <workItem from="1626850031606" duration="1865000" />
+      <workItem from="1626936863668" duration="746000" />
+      <workItem from="1626944239924" duration="228000" />
+      <workItem from="1626957707583" duration="4000" />
+      <workItem from="1626957730018" duration="80000" />
+      <workItem from="1627048141809" duration="39000" />
+      <workItem from="1627289917365" duration="11474000" />
+      <workItem from="1627368985565" duration="1786000" />
+      <workItem from="1627454991219" duration="20312000" />
     </task>
     <servers />
   </component>

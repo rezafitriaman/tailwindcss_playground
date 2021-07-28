@@ -18,7 +18,7 @@
             @apply absolute left-auto right-4 top-1/2 pointer-events-none transform -translate-y-1/2;
 
             svg {
-                @apply inline-block fill-current w-6 h-6;
+                @apply inline-block;
             }
         }
     }

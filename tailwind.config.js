@@ -21,7 +21,7 @@ module.exports = {
         },
       },
       maxHeight: {
-        infinite: '999px',
+        infinite: '9999px',
       }
     },
     fontFamily: {

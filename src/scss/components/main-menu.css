@@ -33,10 +33,12 @@
     }
 }
 
-.nav-container:hover > a::before {
-    opacity: 100;
-}
+@media (min-width: 768px) {
+    .nav-container:hover > a::before {
+        opacity: 100;
+    }
 
-.nav-container:hover > a::after {
-    opacity: 100;
+    .nav-container:hover > a::after {
+        opacity: 100;
+    }
 }

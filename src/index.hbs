@@ -26,7 +26,48 @@
 <body class="text-gray-800 antialiased font-sans">
 
 <!--header-->
-<header class="block w-full fixed top-0 left-0 text-black border-b border-solid border-current z-30">
+<script>
+    function initTopNavigation() {
+
+        return {
+            open: false,
+            slideNav: false,
+            body: document.getElementsByTagName("body")[0],
+
+            noScroll: function() {
+                if(this.open) {
+                    this.body.classList.add('noScroll');
+                }else {
+                    this.body.classList.remove('noScroll');
+                }
+            },
+
+            toggleNav: function (parent) {
+                let navConstrain = parent.querySelectorAll('.nav-constrain');
+                this.open = ! this.open;
+                this.slideNav = false;
+                this.noScroll();
+                navConstrain.forEach(item=> {
+                    if(item.classList.contains('active')) {
+                        item.classList.remove('active')
+                    }
+                })
+            },
+
+            toggleSlideNav: function (target) {
+                this.slideNav = ! this.slideNav;
+
+                if(this.slideNav) {
+                    target.nextElementSibling.classList.add('active');
+                }else  {
+                    target.closest('.nav-constrain').classList.remove('active');
+                }
+            }
+        };
+    }
+</script>
+<header class="block w-full fixed top-0 left-0 text-black border-b border-solid border-gray-200 z-30"
+        x-data="initTopNavigation()">
     <!--discount-->
     <div class="discount-block bg-gray-100">
         <div class="container">
@@ -38,7 +79,7 @@
         </div>
     </div>
 
-    <!--header-->
+    <!--header sections-->
     <div class="header-sections relative max-h-26 bg-black overflow-hidden transition-max-h-26 duration-300 ease-out hide-on-scroll">
         <div class="container">
             <div class="flex flex-wrap md:flex-nowrap">
@@ -46,7 +87,8 @@
                 <div class="header header-left text-white">
                     <div class="md:hidden">
                         <button class="header-hamburger icon"
-                                aria-label="Favorite">
+                                aria-label="Favorite"
+                                @click="toggleNav($refs.parent)">
                             <svg xmlns="http://www.w3.org/2000/svg"
                                  viewBox="0 0 24 24">
                                 <path d="M0 0h24v24H0z" fill="none"/>
@@ -131,12 +173,18 @@
         </div>
     </div>
     <!-- main menu -->
-    <div class="main-menu           visible active">
+    <div class="main-menu hidden flex-col w-full h-full max-w-screen-sm fixed top-0 left-0
+        transform -translate-x-full overflow-hidden transition-transform duration-300 ease-in border-r border-gray-300 bg-white z-30
+        md:max-w-full md:relative md:top-auto md:h-auto md:overflow-visible md:transform-none
+        visible"
+         x-bind:class="{ 'active': open }">
         <!-- close button -->
-        <div class="close-button-container">
+        <div class="close-button-container flex justify-end items-center mt-2 pb-2 border-b border-solid border-gray-300
+            md:hidden">
             <button class="icon"
                     aria-expanded="false"
-                    aria-label="ariaCloseMenu">
+                    aria-label="ariaCloseMenu"
+                    @click="toggleNav($refs.parent)">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24">
                     <path d="M0 0h24v24H0z" fill="none"/>
                     <path
@@ -145,298 +193,479 @@
             </button>
         </div>
         <!-- scroll pane -->
-        <div class="scroll-pane">
-            <div class="slide           active">
+        <div class="scroll-pane h-full mb-4 overflow-x-hidden
+                md:overflow-visible  md:mb-0">
+            <div class="slide w-full transform translate-x-0 transition duration-300 ease-in
+                md:transform-none"
+                 x-bind:class="{ 'active': slideNav }">
                 <div class="w-full">
                     <!--nav-->
-                    <nav class="main-nav-container">
-                        <ul class="main-nav">
-                            <li class="nav-container has-child" aria-haspopup="true">
-                                <a href="#" class="nav-link">
-                                    <span>Product kiezen</span>
-                                    <svg class="fill-current w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <nav class="main-nav-container container flex flex-col
+                            md:flex-row">
+                        <ul class="main-nav flex flex-col flex-nowrap text-xs
+                            md:flex-row md:justify-start md:flex-grow"
+                            x-ref="parent">
+                            <!--TODO hover state-->
+                            <li class="nav-container has-child flex items-center h-14 border-b border-solid border-gray-300
+                                md:border-b-0 md:pr-8
+                                md:group">
+                                <a href="#"
+                                   class="nav-link flex items-center h-14 w-full justify-between
+                                    group-hover:text-primary
+                                    before:empty-content before:z-10 before:pointer-events-none before:absolute before:opacity-0 before:top-0
+                                    before:left-0 before:right-0 before:bottom-0 before:w-full before:h-full before:bg-white
+                                    after:block after:fixed after:empty-content after:pointer-events-none after:opacity-0 after:top-0
+                                    after:left-0 after:right-0 after:bottom-0 after:w-full after:h-full after:bg-opacity-5 after:bg-black-trans
+                                    "
+                                   @click="toggleSlideNav($el)">
+                                    <span class="z-30">Product kiezen</span>
+                                    <svg class="fill-current w-6 h-6 z-30
+                                        md:transform md:rotate-90"
+                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                         <path d="M0 0h24v24H0V0z" fill="none"/>
                                         <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6-6-6z"/>
                                     </svg>
                                 </a>
-                                <div class="nav-constrain           active">
-                                    <!--TODO next-->
-                                    <div class="container">
-                                        <div class="back-container w-full h-16">
-                                            <a href="#" class="link flex justify-start items-center h-16">
-                                                <svg xmlns="http://www.w3.org/2000/svg" height="24px"
+                                <div class="nav-constrain block w-full max-h-0 overflow-hidden absolute top-0 left-full bg-white
+                                    opacity-0 z-10 transition-all duration-300 delay-200 ease-in
+                                    md:pointer-events-auto md:left-0 md:top-14 md:border-b md:border-t md:border-solid md:border-gray-300 md:invisible
+                                    group-hover:max-h-infinite group-hover:visible group-hover:opacity-100 group-hover:visible">
+                                    <div class="container text-xs md:flex md:py-4">
+                                        <div class="back-container w-full h-16 md:hidden">
+                                            <a href="#"
+                                               class="link flex justify-start items-center h-16"
+                                               @click="toggleSlideNav($el)">
+                                                <svg class="relative right-2" xmlns="http://www.w3.org/2000/svg" height="24px"
                                                      viewBox="0 0 24 24" width="24px" fill="#000000">
                                                     <path d="M0 0h24v24H0z" fill="none"/>
                                                     <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
                                                 </svg>
-                                                <span>Naar overzicht</span>
+                                                <span class="text-xs">Naar overzicht</span>
                                             </a>
                                         </div>
 
-                                        <div class="nav-layout">
-                                            <div class="nav-item">
+                                        <div class="nav-layout relative w-full">
+                                            <div class="nav-item md:mb-4">
                                                 <ul class="sub-nav">
-                                                    <li class="sub-nav-item">
-                                                        <strong class="mdc-typography--caption">Product
-                                                            kiezen</strong>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <strong class="text-xs">Product
+                                                            kiezen 1</strong>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto
-                                                            aluminium</a>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto
+                                                            aluminium2</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             karton</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             meerluik</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Poster met
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Poster met
                                                             posterhanger</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             wandcirkel</a>
                                                     </li>
                                                 </ul>
                                             </div>
 
-                                            <div class="nav-item">
+                                            <div class="nav-item md:mb-4">
                                                 <ul class="sub-nav">
-                                                    <li class="sub-nav-item">
-                                                        <strong class="mdc-typography--caption">Product
-                                                            kiezen</strong>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <strong class="text-xs">Product
+                                                            kiezen 1</strong>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto
-                                                            aluminium</a>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto
+                                                            aluminium2</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             karton</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             meerluik</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Poster met
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Poster met
                                                             posterhanger</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             wandcirkel</a>
                                                     </li>
                                                 </ul>
                                             </div>
 
-
-                                            <div class="nav-item">
+                                            <div class="nav-item md:mb-4">
                                                 <ul class="sub-nav">
-                                                    <li class="sub-nav-item">
-                                                        <strong class="mdc-typography--caption">Product
-                                                            kiezen</strong>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <strong class="text-xs">Product
+                                                            kiezen 1</strong>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto
-                                                            aluminium</a>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto
+                                                            aluminium2</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             karton</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             meerluik</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Poster met
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Poster met
                                                             posterhanger</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
-                                                            wandcirkel</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-
-                                        <div class="nav-layout">
-                                            <div class="nav-item">
-                                                <ul class="sub-nav">
-                                                    <li class="sub-nav-item">
-                                                        <strong class="mdc-typography--caption">Product
-                                                            kiezen</strong>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto
-                                                            aluminium</a>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
-                                                            karton</a>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
-                                                            meerluik</a>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Poster met
-                                                            posterhanger</a>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
-                                                            wandcirkel</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-
-                                            <div class="nav-item">
-                                                <ul class="sub-nav">
-                                                    <li class="sub-nav-item">
-                                                        <strong class="mdc-typography--caption">Product
-                                                            kiezen</strong>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto
-                                                            aluminium</a>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
-                                                            karton</a>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
-                                                            meerluik</a>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Poster met
-                                                            posterhanger</a>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
-                                                            wandcirkel</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-
-
-                                            <div class="nav-item">
-                                                <ul class="sub-nav">
-                                                    <li class="sub-nav-item">
-                                                        <strong class="mdc-typography--caption">Product
-                                                            kiezen</strong>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto
-                                                            aluminium</a>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
-                                                            karton</a>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
-                                                            meerluik</a>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Poster met
-                                                            posterhanger</a>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             wandcirkel</a>
                                                     </li>
                                                 </ul>
                                             </div>
                                         </div>
 
-                                        <div class="nav-layout">
-                                            <div class="nav-item">
+                                        <div class="nav-layout relative w-full">
+                                            <div class="nav-item md:mb-4">
                                                 <ul class="sub-nav">
-                                                    <li class="sub-nav-item">
-                                                        <strong class="mdc-typography--caption">Product
-                                                            kiezen</strong>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <strong class="text-xs">Product
+                                                            kiezen 1</strong>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto
-                                                            aluminium</a>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto
+                                                            aluminium2</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             karton</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             meerluik</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Poster met
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Poster met
                                                             posterhanger</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             wandcirkel</a>
                                                     </li>
                                                 </ul>
                                             </div>
 
-                                            <div class="nav-item">
+                                            <div class="nav-item md:mb-4">
                                                 <ul class="sub-nav">
-                                                    <li class="sub-nav-item">
-                                                        <strong class="mdc-typography--caption">Product
-                                                            kiezen</strong>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <strong class="text-xs">Product
+                                                            kiezen 1</strong>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto
-                                                            aluminium</a>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto
+                                                            aluminium2</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             karton</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             meerluik</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Poster met
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Poster met
                                                             posterhanger</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             wandcirkel</a>
                                                     </li>
                                                 </ul>
                                             </div>
 
-
-                                            <div class="nav-item">
+                                            <div class="nav-item md:mb-4">
                                                 <ul class="sub-nav">
-                                                    <li class="sub-nav-item">
-                                                        <strong class="mdc-typography--caption">Product
-                                                            kiezen</strong>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <strong class="text-xs">Product
+                                                            kiezen 1</strong>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto
-                                                            aluminium</a>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto
+                                                            aluminium2</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             karton</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             meerluik</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Poster met
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Poster met
                                                             posterhanger</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            wandcirkel</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="nav-layout relative w-full">
+                                            <div class="nav-item md:mb-4">
+                                                <ul class="sub-nav">
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <strong class="text-xs">Product
+                                                            kiezen 1</strong>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto
+                                                            aluminium2</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            karton</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            meerluik</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Poster met
+                                                            posterhanger</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            wandcirkel</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="nav-item md:mb-4">
+                                                <ul class="sub-nav">
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <strong class="text-xs">Product
+                                                            kiezen 1</strong>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto
+                                                            aluminium2</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            karton</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            meerluik</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Poster met
+                                                            posterhanger</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            wandcirkel</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="nav-item md:mb-4">
+                                                <ul class="sub-nav">
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <strong class="text-xs">Product
+                                                            kiezen 1</strong>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto
+                                                            aluminium2</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            karton</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            meerluik</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Poster met
+                                                            posterhanger</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            wandcirkel</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="nav-layout relative w-full">
+                                            <div class="nav-item md:mb-4">
+                                                <ul class="sub-nav">
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <strong class="text-xs">Product
+                                                            kiezen 1</strong>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto
+                                                            aluminium2</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            karton</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            meerluik</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Poster met
+                                                            posterhanger</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            wandcirkel</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="nav-item md:mb-4">
+                                                <ul class="sub-nav">
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <strong class="text-xs">Product
+                                                            kiezen 1</strong>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto
+                                                            aluminium2</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            karton</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            meerluik</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Poster met
+                                                            posterhanger</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            wandcirkel</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="nav-item md:mb-4">
+                                                <ul class="sub-nav">
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <strong class="text-xs">Product
+                                                            kiezen 1</strong>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto
+                                                            aluminium2</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            karton</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            meerluik</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Poster met
+                                                            posterhanger</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             wandcirkel</a>
                                                     </li>
                                                 </ul>
@@ -445,293 +674,359 @@
                                     </div>
                                 </div>
                             </li>
-
-                            <li class="nav-container has-child" aria-haspopup="true">
-                                <a href="#" class="nav-link">
-                                    <span>Product kiezen</span>
-                                    <svg class="fill-current w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <li class="nav-container has-child flex items-center h-14 border-b border-solid border-gray-300
+                                md:border-b-0 md:pr-8
+                                md:group">
+                                <a href="#"
+                                   class="nav-link flex items-center h-14 w-full justify-between
+                                    group-hover:text-primary
+                                    before:empty-content before:z-10 before:pointer-events-none before:absolute before:opacity-0 before:top-0
+                                    before:left-0 before:right-0 before:bottom-0 before:w-full before:h-full before:bg-white
+                                    after:block after:fixed after:empty-content after:pointer-events-none after:opacity-0 after:top-0
+                                    after:left-0 after:right-0 after:bottom-0 after:w-full after:h-full after:bg-opacity-5 after:bg-black-trans
+                                    "
+                                   @click="toggleSlideNav($el)">
+                                    <span class="z-30">Categorieën</span>
+                                    <svg class="fill-current w-6 h-6 z-30
+                                        md:transform md:rotate-90"
+                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                         <path d="M0 0h24v24H0V0z" fill="none"/>
                                         <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6-6-6z"/>
                                     </svg>
                                 </a>
-                                <div class="nav-constrain           active">
-                                    <!--TODO next-->
-                                    <div class="container">
-                                        <div class="back-container w-full h-16">
-                                            <a href="#" class="link flex justify-start items-center h-16">
-                                                <svg xmlns="http://www.w3.org/2000/svg" height="24px"
+                                <div class="nav-constrain block w-full max-h-0 overflow-hidden absolute top-0 left-full bg-white
+                                opacity-0 z-10 transition-all duration-300 delay-200 ease-in
+                                md:pointer-events-auto md:left-0 md:top-14 md:border-b md:border-t md:border-solid md:border-gray-300 md:invisible
+                                group-hover:max-h-infinite group-hover:visible group-hover:opacity-100 group-hover:visible">
+                                    <div class="container text-xs md:flex md:py-4">
+                                        <div class="back-container w-full h-16 md:hidden">
+                                            <a href="#"
+                                               class="link flex justify-start items-center h-16"
+                                               @click="toggleSlideNav($el)">
+                                                <svg class="relative right-2" xmlns="http://www.w3.org/2000/svg" height="24px"
                                                      viewBox="0 0 24 24" width="24px" fill="#000000">
                                                     <path d="M0 0h24v24H0z" fill="none"/>
                                                     <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
                                                 </svg>
-                                                <span>Naar overzicht</span>
+                                                <span class="text-xs">Naar overzicht</span>
                                             </a>
                                         </div>
 
-                                        <div class="nav-layout">
-                                            <div class="nav-item">
+                                        <div class="nav-layout relative w-full">
+                                            <div class="nav-item md:mb-4">
                                                 <ul class="sub-nav">
-                                                    <li class="sub-nav-item">
-                                                        <strong class="mdc-typography--caption">Product
-                                                            kiezen</strong>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <strong class="text-xs">Product
+                                                            kiezen 1</strong>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto
-                                                            aluminium</a>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto
+                                                            aluminium2</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             karton</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             meerluik</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Poster met
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Poster met
                                                             posterhanger</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             wandcirkel</a>
                                                     </li>
                                                 </ul>
                                             </div>
 
-                                            <div class="nav-item">
+                                            <div class="nav-item md:mb-4">
                                                 <ul class="sub-nav">
-                                                    <li class="sub-nav-item">
-                                                        <strong class="mdc-typography--caption">Product
-                                                            kiezen</strong>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <strong class="text-xs">Product
+                                                            kiezen 1</strong>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto
-                                                            aluminium</a>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto
+                                                            aluminium2</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             karton</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             meerluik</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Poster met
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Poster met
                                                             posterhanger</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             wandcirkel</a>
                                                     </li>
                                                 </ul>
                                             </div>
 
-
-                                            <div class="nav-item">
+                                            <div class="nav-item md:mb-4">
                                                 <ul class="sub-nav">
-                                                    <li class="sub-nav-item">
-                                                        <strong class="mdc-typography--caption">Product
-                                                            kiezen</strong>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <strong class="text-xs">Product
+                                                            kiezen 1</strong>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto
-                                                            aluminium</a>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto
+                                                            aluminium2</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             karton</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             meerluik</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Poster met
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Poster met
                                                             posterhanger</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
-                                                            wandcirkel</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-
-                                        <div class="nav-layout">
-                                            <div class="nav-item">
-                                                <ul class="sub-nav">
-                                                    <li class="sub-nav-item">
-                                                        <strong class="mdc-typography--caption">Product
-                                                            kiezen</strong>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto
-                                                            aluminium</a>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
-                                                            karton</a>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
-                                                            meerluik</a>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Poster met
-                                                            posterhanger</a>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
-                                                            wandcirkel</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-
-                                            <div class="nav-item">
-                                                <ul class="sub-nav">
-                                                    <li class="sub-nav-item">
-                                                        <strong class="mdc-typography--caption">Product
-                                                            kiezen</strong>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto
-                                                            aluminium</a>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
-                                                            karton</a>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
-                                                            meerluik</a>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Poster met
-                                                            posterhanger</a>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
-                                                            wandcirkel</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-
-
-                                            <div class="nav-item">
-                                                <ul class="sub-nav">
-                                                    <li class="sub-nav-item">
-                                                        <strong class="mdc-typography--caption">Product
-                                                            kiezen</strong>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto
-                                                            aluminium</a>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
-                                                            karton</a>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
-                                                            meerluik</a>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Poster met
-                                                            posterhanger</a>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             wandcirkel</a>
                                                     </li>
                                                 </ul>
                                             </div>
                                         </div>
 
-                                        <div class="nav-layout">
-                                            <div class="nav-item">
+                                        <div class="nav-layout relative w-full">
+                                            <div class="nav-item md:mb-4">
                                                 <ul class="sub-nav">
-                                                    <li class="sub-nav-item">
-                                                        <strong class="mdc-typography--caption">Product
-                                                            kiezen</strong>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <strong class="text-xs">Product
+                                                            kiezen 1</strong>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto
-                                                            aluminium</a>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto
+                                                            aluminium2</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             karton</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             meerluik</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Poster met
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Poster met
                                                             posterhanger</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             wandcirkel</a>
                                                     </li>
                                                 </ul>
                                             </div>
 
-                                            <div class="nav-item">
+                                            <div class="nav-item md:mb-4">
                                                 <ul class="sub-nav">
-                                                    <li class="sub-nav-item">
-                                                        <strong class="mdc-typography--caption">Product
-                                                            kiezen</strong>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <strong class="text-xs">Product
+                                                            kiezen 1</strong>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto
-                                                            aluminium</a>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto
+                                                            aluminium2</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             karton</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             meerluik</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Poster met
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Poster met
                                                             posterhanger</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             wandcirkel</a>
                                                     </li>
                                                 </ul>
                                             </div>
 
-
-                                            <div class="nav-item">
+                                            <div class="nav-item md:mb-4">
                                                 <ul class="sub-nav">
-                                                    <li class="sub-nav-item">
-                                                        <strong class="mdc-typography--caption">Product
-                                                            kiezen</strong>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <strong class="text-xs">Product
+                                                            kiezen 1</strong>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto
-                                                            aluminium</a>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto
+                                                            aluminium2</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             karton</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             meerluik</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Poster met
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Poster met
                                                             posterhanger</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            wandcirkel</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="nav-layout relative w-full">
+                                            <div class="nav-item md:mb-4">
+                                                <ul class="sub-nav">
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <strong class="text-xs">Product
+                                                            kiezen 1</strong>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto
+                                                            aluminium2</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            karton</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            meerluik</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Poster met
+                                                            posterhanger</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            wandcirkel</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="nav-item md:mb-4">
+                                                <ul class="sub-nav">
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <strong class="text-xs">Product
+                                                            kiezen 1</strong>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto
+                                                            aluminium2</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            karton</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            meerluik</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Poster met
+                                                            posterhanger</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            wandcirkel</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="nav-item md:mb-4">
+                                                <ul class="sub-nav">
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <strong class="text-xs">Product
+                                                            kiezen 1</strong>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto
+                                                            aluminium2</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            karton</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            meerluik</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Poster met
+                                                            posterhanger</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             wandcirkel</a>
                                                     </li>
                                                 </ul>
@@ -740,293 +1035,466 @@
                                     </div>
                                 </div>
                             </li>
-
-                            <li class="nav-container has-child" aria-haspopup="true">
-                                <a href="#" class="nav-link">
-                                    <span>Product kiezen</span>
-                                    <svg class="fill-current w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <li class="nav-container has-child flex items-center h-14 border-b border-solid border-gray-300
+                                md:border-b-0 md:pr-8
+                                md:group">
+                                <a href="#"
+                                   class="nav-link flex items-center h-14 w-full justify-between
+                                   md:group-hover:text-primary
+                                    before:empty-content before:z-10 before:pointer-events-none before:absolute before:opacity-0 before:top-0
+                                    before:left-0 before:right-0 before:bottom-0 before:w-full before:h-full before:bg-white
+                                    after:block after:fixed after:empty-content after:pointer-events-none after:opacity-0 after:top-0
+                                    after:left-0 after:right-0 after:bottom-0 after:w-full after:h-full after:bg-opacity-5 after:bg-black-trans
+                                    "
+                                   @click="toggleSlideNav($el)">
+                                    <span class="z-30">Collecties</span>
+                                    <svg class="fill-current w-6 h-6 z-30
+                                        md:transform md:rotate-90"
+                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                         <path d="M0 0h24v24H0V0z" fill="none"/>
                                         <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6-6-6z"/>
                                     </svg>
                                 </a>
-                                <div class="nav-constrain           active">
-                                    <!--TODO next-->
-                                    <div class="container">
-                                        <div class="back-container w-full h-16">
-                                            <a href="#" class="link flex justify-start items-center h-16">
-                                                <svg xmlns="http://www.w3.org/2000/svg" height="24px"
+                                <div class="nav-constrain block w-full max-h-0 overflow-hidden absolute top-0 left-full bg-white
+                                opacity-0 z-10 transition-all duration-300 delay-200 ease-in
+                                md:pointer-events-auto md:left-0 md:top-14 md:border-b md:border-t md:border-solid md:border-gray-300 md:invisible
+                                group-hover:max-h-infinite group-hover:visible group-hover:opacity-100 group-hover:visible">
+                                    <div class="container text-xs md:flex md:py-4">
+                                        <div class="back-container w-full h-16 md:hidden">
+                                            <a href="#"
+                                               class="link flex justify-start items-center h-16"
+                                               @click="toggleSlideNav($el)">
+                                                <svg class="relative right-2" xmlns="http://www.w3.org/2000/svg" height="24px"
                                                      viewBox="0 0 24 24" width="24px" fill="#000000">
                                                     <path d="M0 0h24v24H0z" fill="none"/>
                                                     <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
                                                 </svg>
-                                                <span>Naar overzicht</span>
+                                                <span class="text-xs">Naar overzicht</span>
                                             </a>
                                         </div>
 
-                                        <div class="nav-layout">
-                                            <div class="nav-item">
+                                        <div class="nav-layout relative w-full">
+                                            <div class="nav-item md:mb-4">
                                                 <ul class="sub-nav">
-                                                    <li class="sub-nav-item">
-                                                        <strong class="mdc-typography--caption">Product
-                                                            kiezen</strong>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <strong class="text-xs">Product
+                                                            kiezen 1</strong>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto
-                                                            aluminium</a>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto
+                                                            aluminium2</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             karton</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             meerluik</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Poster met
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Poster met
                                                             posterhanger</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             wandcirkel</a>
                                                     </li>
                                                 </ul>
                                             </div>
 
-                                            <div class="nav-item">
+                                            <div class="nav-item md:mb-4">
                                                 <ul class="sub-nav">
-                                                    <li class="sub-nav-item">
-                                                        <strong class="mdc-typography--caption">Product
-                                                            kiezen</strong>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <strong class="text-xs">Product
+                                                            kiezen 1</strong>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto
-                                                            aluminium</a>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto
+                                                            aluminium2</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             karton</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             meerluik</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Poster met
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Poster met
                                                             posterhanger</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             wandcirkel</a>
                                                     </li>
                                                 </ul>
                                             </div>
 
-
-                                            <div class="nav-item">
+                                            <div class="nav-item md:mb-4">
                                                 <ul class="sub-nav">
-                                                    <li class="sub-nav-item">
-                                                        <strong class="mdc-typography--caption">Product
-                                                            kiezen</strong>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <strong class="text-xs">Product
+                                                            kiezen 1</strong>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto
-                                                            aluminium</a>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto
+                                                            aluminium2</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             karton</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             meerluik</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Poster met
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Poster met
                                                             posterhanger</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
-                                                            wandcirkel</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-
-                                        <div class="nav-layout">
-                                            <div class="nav-item">
-                                                <ul class="sub-nav">
-                                                    <li class="sub-nav-item">
-                                                        <strong class="mdc-typography--caption">Product
-                                                            kiezen</strong>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto
-                                                            aluminium</a>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
-                                                            karton</a>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
-                                                            meerluik</a>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Poster met
-                                                            posterhanger</a>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
-                                                            wandcirkel</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-
-                                            <div class="nav-item">
-                                                <ul class="sub-nav">
-                                                    <li class="sub-nav-item">
-                                                        <strong class="mdc-typography--caption">Product
-                                                            kiezen</strong>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto
-                                                            aluminium</a>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
-                                                            karton</a>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
-                                                            meerluik</a>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Poster met
-                                                            posterhanger</a>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
-                                                            wandcirkel</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-
-
-                                            <div class="nav-item">
-                                                <ul class="sub-nav">
-                                                    <li class="sub-nav-item">
-                                                        <strong class="mdc-typography--caption">Product
-                                                            kiezen</strong>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto
-                                                            aluminium</a>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
-                                                            karton</a>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
-                                                            meerluik</a>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Poster met
-                                                            posterhanger</a>
-                                                    </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             wandcirkel</a>
                                                     </li>
                                                 </ul>
                                             </div>
                                         </div>
 
-                                        <div class="nav-layout">
-                                            <div class="nav-item">
+                                        <div class="nav-layout relative w-full">
+                                            <div class="nav-item md:mb-4">
                                                 <ul class="sub-nav">
-                                                    <li class="sub-nav-item">
-                                                        <strong class="mdc-typography--caption">Product
-                                                            kiezen</strong>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <strong class="text-xs">Product
+                                                            kiezen 1</strong>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto
-                                                            aluminium</a>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto
+                                                            aluminium2</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             karton</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             meerluik</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Poster met
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Poster met
                                                             posterhanger</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             wandcirkel</a>
                                                     </li>
                                                 </ul>
                                             </div>
 
-                                            <div class="nav-item">
+                                            <div class="nav-item md:mb-4">
                                                 <ul class="sub-nav">
-                                                    <li class="sub-nav-item">
-                                                        <strong class="mdc-typography--caption">Product
-                                                            kiezen</strong>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <strong class="text-xs">Product
+                                                            kiezen 1</strong>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto
-                                                            aluminium</a>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto
+                                                            aluminium2</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             karton</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             meerluik</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Poster met
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Poster met
                                                             posterhanger</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             wandcirkel</a>
                                                     </li>
                                                 </ul>
                                             </div>
 
-
-                                            <div class="nav-item">
+                                            <div class="nav-item md:mb-4">
                                                 <ul class="sub-nav">
-                                                    <li class="sub-nav-item">
-                                                        <strong class="mdc-typography--caption">Product
-                                                            kiezen</strong>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <strong class="text-xs">Product
+                                                            kiezen 1</strong>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto
-                                                            aluminium</a>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto
+                                                            aluminium2</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             karton</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             meerluik</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Poster met
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Poster met
                                                             posterhanger</a>
                                                     </li>
-                                                    <li class="sub-nav-item">
-                                                        <a href="#" class="mdc-typography--caption">Foto op
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            wandcirkel</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="nav-layout relative w-full">
+                                            <div class="nav-item md:mb-4">
+                                                <ul class="sub-nav">
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <strong class="text-xs">Product
+                                                            kiezen 1</strong>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto
+                                                            aluminium2</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            karton</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            meerluik</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Poster met
+                                                            posterhanger</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            wandcirkel</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="nav-item md:mb-4">
+                                                <ul class="sub-nav">
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <strong class="text-xs">Product
+                                                            kiezen 1</strong>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto
+                                                            aluminium2</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            karton</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            meerluik</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Poster met
+                                                            posterhanger</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            wandcirkel</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="nav-item md:mb-4">
+                                                <ul class="sub-nav">
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <strong class="text-xs">Product
+                                                            kiezen 1</strong>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto
+                                                            aluminium2</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            karton</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            meerluik</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Poster met
+                                                            posterhanger</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            wandcirkel</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="nav-layout relative w-full">
+                                            <div class="nav-item md:mb-4">
+                                                <ul class="sub-nav">
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <strong class="text-xs">Product
+                                                            kiezen 1</strong>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto
+                                                            aluminium2</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            karton</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            meerluik</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Poster met
+                                                            posterhanger</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            wandcirkel</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="nav-item md:mb-4">
+                                                <ul class="sub-nav">
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <strong class="text-xs">Product
+                                                            kiezen 1</strong>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto
+                                                            aluminium2</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            karton</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            meerluik</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Poster met
+                                                            posterhanger</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            wandcirkel</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="nav-item md:mb-4">
+                                                <ul class="sub-nav">
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <strong class="text-xs">Product
+                                                            kiezen 1</strong>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto
+                                                            aluminium2</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            karton</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
+                                                            meerluik</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Poster met
+                                                            posterhanger</a>
+                                                    </li>
+                                                    <li class="sub-nav-item flex h-14 items-center border-b border-solid border-gray-300
+                                                        md:h-6 md:border-b-0">
+                                                        <a href="#" class="text-xs font-light">Foto op
                                                             wandcirkel</a>
                                                     </li>
                                                 </ul>
@@ -1035,41 +1503,44 @@
                                     </div>
                                 </div>
                             </li>
-
                         </ul>
 
-                        <ul class="secondary-nav">
-                            <li class="secondary-nav--container">
-                                <a href="#" class="secondary-nav--link mdc-typography--caption">
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24"
+                        <ul class="secondary-nav flex flex-col justify-start text-xs
+                            md:flex-row  md:justify-end md:flex-shrink">
+                            <li class="nav-container flex items-center h-14 border-b border-solid border-gray-300
+                                    md:border-b-0 md:mr-8">
+                                <a href="#" class="nav-link flex items-center h-14 w-full justify-start">
+                                    <svg class="md:hidden" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24"
                                          width="24px" fill="#000000">
                                         <path d="M0 0h24v24H0V0z" fill="none"/>
                                         <path
                                                 d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM7.07 18.28c.43-.9 3.05-1.78 4.93-1.78s4.51.88 4.93 1.78C15.57 19.36 13.86 20 12 20s-3.57-.64-4.93-1.72zm11.29-1.45c-1.43-1.74-4.9-2.33-6.36-2.33s-4.93.59-6.36 2.33C4.62 15.49 4 13.82 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8c0 1.82-.62 3.49-1.64 4.83zM12 6c-1.94 0-3.5 1.56-3.5 3.5S10.06 13 12 13s3.5-1.56 3.5-3.5S13.94 6 12 6zm0 5c-.83 0-1.5-.67-1.5-1.5S11.17 8 12 8s1.5.67 1.5 1.5S12.83 11 12 11z"/>
                                     </svg>
-                                    <span>Mijn account</span>
+                                    <span class="ml-2 md:ml-0 z-10">Mijn account</span>
                                 </a>
                             </li>
-                            <li class="secondary-nav--container">
-                                <a href="#" class="secondary-nav--link mdc-typography--caption">
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24"
+                            <li class="nav-container flex items-center h-14 border-b border-solid border-gray-300
+                                    md:border-b-0 md:mr-8">
+                                <a href="#" class="nav-link flex items-center h-14 w-full justify-start">
+                                    <svg class="md:hidden" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24"
                                          width="24px" fill="#000000">
                                         <path d="M0 0h24v24H0V0z" fill="none"/>
                                         <path
                                                 d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"/>
                                     </svg>
-                                    <span>Veelgestelde vragen</span>
+                                    <span class="ml-2 md:ml-0 z-10">Veelgestelde vragen</span>
                                 </a>
                             </li>
-                            <li class="secondary-nav--container">
-                                <a href="#" class="secondary-nav--link mdc-typography--caption">
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24"
+                            <li class="nav-container flex items-center h-14 border-b border-solid border-gray-300
+                                    md:border-b-0 md:mr-8">
+                                <a href="#" class="nav-link flex items-center h-14 w-full justify-start">
+                                    <svg class="md:hidden" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24"
                                          width="24px" fill="#000000">
                                         <path d="M0 0h24v24H0V0z" fill="none"/>
                                         <path
                                                 d="M20 7h-4V5l-2-2h-4L8 5v2H4c-1.1 0-2 .9-2 2v5c0 .75.4 1.38 1 1.73V19c0 1.11.89 2 2 2h14c1.11 0 2-.89 2-2v-3.28c.59-.35 1-.99 1-1.72V9c0-1.1-.9-2-2-2zM10 5h4v2h-4V5zM4 9h16v5h-5v-3H9v3H4V9zm9 6h-2v-2h2v2zm6 4H5v-3h4v1h6v-1h4v3z"/>
                                     </svg>
-                                    <span>Zakelijk</span>
+                                    <span class="ml-2 md:ml-0 z-10">Zakelijk</span>
                                 </a>
                             </li>
                         </ul>
@@ -1078,7 +1549,10 @@
             </div>
         </div>
     </div>
-    <div class="main-menu-overlay"></div>
+    <div class="main-menu-overlay block h-full fixed inset-0 opacity-0 pointer-events-none bg-black bg-opacity-25 z-10
+        transition-all duration-500 ease-in cursor-pointer;"
+         @click="toggleNav($refs.parent)"
+         x-bind:class="{ 'active': open }"></div>
 </header>
 
 <!--main-->
@@ -1194,7 +1668,7 @@
                     <li class="accordion-list md:mb-5" x-data="initAccordion()" x-init="media($refs)">
                         <!--accordion header-->
                         <div class="accordion-list-title md:pointer-events-none	md:cursor-default" tabindex="0" @click="scrollHeight($refs)">
-                            <strong class="text-sm">Foto op aluminium</strong>
+                            <strong class="text-xs">Foto op aluminium</strong>
                             <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
                         </span>
@@ -1236,7 +1710,7 @@
                     <li class="accordion-list md:mb-5" x-data="initAccordion()" x-init="media($refs)">
                         <!--accordion header-->
                         <div class="accordion-list-title md:pointer-events-none	md:cursor-default" tabindex="0" @click="scrollHeight($refs)">
-                            <strong class="text-sm">Foto op aluminium</strong>
+                            <strong class="text-xs">Foto op aluminium</strong>
                             <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
                         </span>
@@ -1278,136 +1752,7 @@
                     <li class="accordion-list md:mb-5" x-data="initAccordion()" x-init="media($refs)">
                         <!--accordion header-->
                         <div class="accordion-list-title md:pointer-events-none	md:cursor-default" tabindex="0" @click="scrollHeight($refs)">
-                            <strong class="text-sm">Foto op aluminium</strong>
-                            <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
-                        </span>
-                            <span class="expand_more absolute right-0 md:hidden" aria-hidden="true" x-show="open">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
-                        </span>
-                        </div>
-                        <!--accordion body-->
-                        <span class="accordion-list-content max-h-0" x-ref="accordionBody">
-                        <ul class="accordion-list-content--navigation-group">
-                            <li class="accordion-list-content--item mb-2">
-                                <div class="image-container hidden">
-                                    <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
-                                </div>
-                                <div class="link-container">
-                                    <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
-                                </div>
-                            </li>
-                            <li class="accordion-list-content--item mb-2">
-                                <div class="image-container hidden">
-                                    <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
-                                </div>
-                                <div class="link-container">
-                                    <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
-                                </div>
-                            </li>
-                            <li class="accordion-list-content--item mb-2">
-                                <div class="image-container hidden">
-                                    <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
-                                </div>
-                                <div class="link-container">
-                                    <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </span>
-                    </li>
-                    <li role="separator" class="separator"></li>
-                </ul>
-                <!--new column-->
-                <ul class="accordion flex-1 md:pr-4"><!--first column-->
-                    <li class="accordion-list md:mb-5" x-data="initAccordion()" x-init="media($refs)">
-                        <!--accordion header-->
-                        <div class="accordion-list-title md:pointer-events-none	md:cursor-default" tabindex="0" @click="scrollHeight($refs)">
-                            <strong class="text-sm">Foto op aluminium</strong>
-                            <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
-                        </span>
-                            <span class="expand_more absolute right-0 md:hidden" aria-hidden="true" x-show="open">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
-                        </span>
-                        </div>
-                        <!--accordion body-->
-                        <span class="accordion-list-content max-h-0" x-ref="accordionBody">
-                        <ul class="accordion-list-content--navigation-group">
-                            <li class="accordion-list-content--item mb-2">
-                                <div class="image-container hidden">
-                                    <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
-                                </div>
-                                <div class="link-container">
-                                    <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
-                                </div>
-                            </li>
-                            <li class="accordion-list-content--item mb-2">
-                                <div class="image-container hidden">
-                                    <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
-                                </div>
-                                <div class="link-container">
-                                    <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
-                                </div>
-                            </li>
-                            <li class="accordion-list-content--item mb-2">
-                                <div class="image-container hidden">
-                                    <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
-                                </div>
-                                <div class="link-container">
-                                    <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </span>
-                    </li>
-                    <li role="separator" class="separator"></li>
-                    <li class="accordion-list md:mb-5" x-data="initAccordion()" x-init="media($refs)">
-                        <!--accordion header-->
-                        <div class="accordion-list-title md:pointer-events-none	md:cursor-default" tabindex="0" @click="scrollHeight($refs)">
-                            <strong class="text-sm">Foto op aluminium</strong>
-                            <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
-                        </span>
-                            <span class="expand_more absolute right-0 md:hidden" aria-hidden="true" x-show="open">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
-                        </span>
-                        </div>
-                        <!--accordion body-->
-                        <span class="accordion-list-content max-h-0" x-ref="accordionBody">
-                        <ul class="accordion-list-content--navigation-group">
-                            <li class="accordion-list-content--item mb-2">
-                                <div class="image-container hidden">
-                                    <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
-                                </div>
-                                <div class="link-container">
-                                    <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
-                                </div>
-                            </li>
-                            <li class="accordion-list-content--item mb-2">
-                                <div class="image-container hidden">
-                                    <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
-                                </div>
-                                <div class="link-container">
-                                    <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
-                                </div>
-                            </li>
-                            <li class="accordion-list-content--item mb-2">
-                                <div class="image-container hidden">
-                                    <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
-                                </div>
-                                <div class="link-container">
-                                    <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </span>
-                    </li>
-                    <li role="separator" class="separator"></li>
-                    <li class="accordion-list md:mb-5" x-data="initAccordion()" x-init="media($refs)">
-                        <!--accordion header-->
-                        <div class="accordion-list-title md:pointer-events-none	md:cursor-default" tabindex="0" @click="scrollHeight($refs)">
-                            <strong class="text-sm">Foto op aluminium</strong>
+                            <strong class="text-xs">Foto op aluminium</strong>
                             <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
                         </span>
@@ -1452,7 +1797,7 @@
                     <li class="accordion-list md:mb-5" x-data="initAccordion()" x-init="media($refs)">
                         <!--accordion header-->
                         <div class="accordion-list-title md:pointer-events-none	md:cursor-default" tabindex="0" @click="scrollHeight($refs)">
-                            <strong class="text-sm">Foto op aluminium</strong>
+                            <strong class="text-xs">Foto op aluminium</strong>
                             <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
                         </span>
@@ -1494,7 +1839,7 @@
                     <li class="accordion-list md:mb-5" x-data="initAccordion()" x-init="media($refs)">
                         <!--accordion header-->
                         <div class="accordion-list-title md:pointer-events-none	md:cursor-default" tabindex="0" @click="scrollHeight($refs)">
-                            <strong class="text-sm">Foto op aluminium</strong>
+                            <strong class="text-xs">Foto op aluminium</strong>
                             <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
                         </span>
@@ -1536,7 +1881,7 @@
                     <li class="accordion-list md:mb-5" x-data="initAccordion()" x-init="media($refs)">
                         <!--accordion header-->
                         <div class="accordion-list-title md:pointer-events-none	md:cursor-default" tabindex="0" @click="scrollHeight($refs)">
-                            <strong class="text-sm">Foto op aluminium</strong>
+                            <strong class="text-xs">Foto op aluminium</strong>
                             <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
                         </span>
@@ -1581,7 +1926,7 @@
                     <li class="accordion-list md:mb-5" x-data="initAccordion()" x-init="media($refs)">
                         <!--accordion header-->
                         <div class="accordion-list-title md:pointer-events-none	md:cursor-default" tabindex="0" @click="scrollHeight($refs)">
-                            <strong class="text-sm">Foto op aluminium</strong>
+                            <strong class="text-xs">Foto op aluminium</strong>
                             <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
                         </span>
@@ -1623,7 +1968,7 @@
                     <li class="accordion-list md:mb-5" x-data="initAccordion()" x-init="media($refs)">
                         <!--accordion header-->
                         <div class="accordion-list-title md:pointer-events-none	md:cursor-default" tabindex="0" @click="scrollHeight($refs)">
-                            <strong class="text-sm">Foto op aluminium</strong>
+                            <strong class="text-xs">Foto op aluminium</strong>
                             <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
                         </span>
@@ -1665,7 +2010,136 @@
                     <li class="accordion-list md:mb-5" x-data="initAccordion()" x-init="media($refs)">
                         <!--accordion header-->
                         <div class="accordion-list-title md:pointer-events-none	md:cursor-default" tabindex="0" @click="scrollHeight($refs)">
-                            <strong class="text-sm">Foto op aluminium</strong>
+                            <strong class="text-xs">Foto op aluminium</strong>
+                            <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
+                        </span>
+                            <span class="expand_more absolute right-0 md:hidden" aria-hidden="true" x-show="open">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
+                        </span>
+                        </div>
+                        <!--accordion body-->
+                        <span class="accordion-list-content max-h-0" x-ref="accordionBody">
+                        <ul class="accordion-list-content--navigation-group">
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
+                                </div>
+                            </li>
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
+                                </div>
+                            </li>
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </span>
+                    </li>
+                    <li role="separator" class="separator"></li>
+                </ul>
+                <!--new column-->
+                <ul class="accordion flex-1 md:pr-4"><!--first column-->
+                    <li class="accordion-list md:mb-5" x-data="initAccordion()" x-init="media($refs)">
+                        <!--accordion header-->
+                        <div class="accordion-list-title md:pointer-events-none	md:cursor-default" tabindex="0" @click="scrollHeight($refs)">
+                            <strong class="text-xs">Foto op aluminium</strong>
+                            <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
+                        </span>
+                            <span class="expand_more absolute right-0 md:hidden" aria-hidden="true" x-show="open">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
+                        </span>
+                        </div>
+                        <!--accordion body-->
+                        <span class="accordion-list-content max-h-0" x-ref="accordionBody">
+                        <ul class="accordion-list-content--navigation-group">
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
+                                </div>
+                            </li>
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
+                                </div>
+                            </li>
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </span>
+                    </li>
+                    <li role="separator" class="separator"></li>
+                    <li class="accordion-list md:mb-5" x-data="initAccordion()" x-init="media($refs)">
+                        <!--accordion header-->
+                        <div class="accordion-list-title md:pointer-events-none	md:cursor-default" tabindex="0" @click="scrollHeight($refs)">
+                            <strong class="text-xs">Foto op aluminium</strong>
+                            <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
+                        </span>
+                            <span class="expand_more absolute right-0 md:hidden" aria-hidden="true" x-show="open">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
+                        </span>
+                        </div>
+                        <!--accordion body-->
+                        <span class="accordion-list-content max-h-0" x-ref="accordionBody">
+                        <ul class="accordion-list-content--navigation-group">
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/wandcirkel-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Wandcirkel op aluminium</a>
+                                </div>
+                            </li>
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/meerluik-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Meerluik op aluminium</a>
+                                </div>
+                            </li>
+                            <li class="accordion-list-content--item mb-2">
+                                <div class="image-container hidden">
+                                    <span class="image" style="background-image: url('img/collage-ontdek-alles.png')"></span>
+                                </div>
+                                <div class="link-container">
+                                    <a class="link text-sm hover:text-pink-500" href="#">Collage op aluminium</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </span>
+                    </li>
+                    <li role="separator" class="separator"></li>
+                    <li class="accordion-list md:mb-5" x-data="initAccordion()" x-init="media($refs)">
+                        <!--accordion header-->
+                        <div class="accordion-list-title md:pointer-events-none	md:cursor-default" tabindex="0" @click="scrollHeight($refs)">
+                            <strong class="text-xs">Foto op aluminium</strong>
                             <span class="expand_less absolute right-0 md:hidden" aria-hidden="true" x-show="!open">
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z"/></svg>
                         </span>

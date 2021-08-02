@@ -3,7 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="d5a5026e-f1b7-4cc6-972b-fc60d790e2f9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scss/components/icon.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/scss/components/icon.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/scss/components/main-menu.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/scss/components/main-menu.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/tailwind.config.js" afterDir="false" />
     </list>
@@ -142,6 +145,9 @@
       <workItem from="1627454991219" duration="20367000" />
       <workItem from="1627509700312" duration="161000" />
       <workItem from="1627509995380" duration="1023000" />
+      <workItem from="1627541655200" duration="21185000" />
+      <workItem from="1627627267330" duration="654000" />
+      <workItem from="1627892493436" duration="24205000" />
     </task>
     <servers />
   </component>

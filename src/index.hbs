@@ -207,16 +207,17 @@
                             x-ref="parent">
                             <!--TODO hover state-->
                             <li class="nav-container has-child flex items-center h-14 border-b border-solid border-gray-300
-                                md:border-b-0 md:pr-8
-                                group">
+                                md:border-b-0 md:pr-8 group">
                                 <a href="#"
                                    class="nav-link flex items-center h-14 w-full justify-between
-                                    group-hover:text-primary
+                                    transition-all duration-200 ease-in-out delay-200
+                                    md:group-hover:text-primary
                                     before:empty-content before:z-10 before:pointer-events-none before:absolute before:opacity-0 before:top-0
                                     before:left-0 before:right-0 before:bottom-0 before:w-full before:h-full before:bg-white
+                                    before:transition-all before:duration-200 before:ease-in-out before:delay-200
                                     after:block after:fixed after:empty-content after:pointer-events-none after:opacity-0 after:top-0
                                     after:left-0 after:right-0 after:bottom-0 after:w-full after:h-full after:bg-opacity-5 after:bg-black-trans
-                                    "
+                                    after:transition-all after:duration-200 after:ease-in-out after:delay-200"
                                    @click="toggleSlideNav($el)">
                                     <span class="z-30">Product kiezen</span>
                                     <svg class="fill-current w-6 h-6 z-30
@@ -227,9 +228,10 @@
                                     </svg>
                                 </a>
                                 <div class="nav-constrain block w-full max-h-0 overflow-hidden absolute top-0 left-full bg-white
-                                    opacity-0 z-10 transition-all duration-300 delay-200 ease-in
+                                    opacity-0 z-10
                                     md:pointer-events-auto md:left-0 md:top-14 md:border-b md:border-t md:border-solid md:border-gray-300 md:invisible
-                                    group-hover:max-h-infinite group-hover:visible group-hover:opacity-100 group-hover:visible">
+                                    md:group-hover:max-h-infinite md:group-hover:visible md:group-hover:opacity-100 md:group-hover:visible
+                                    md:group-hover:transition-all md:group-hover:delay-300 md:group-hover:duration-300 md:group-hover:ease-in-out">
                                     <div class="container text-xs md:flex md:py-4">
                                         <div class="back-container w-full h-16 md:hidden">
                                             <a href="#"
@@ -675,16 +677,17 @@
                                 </div>
                             </li>
                             <li class="nav-container has-child flex items-center h-14 border-b border-solid border-gray-300
-                                md:border-b-0 md:pr-8
-                                group">
+                                md:border-b-0 md:pr-8 group">
                                 <a href="#"
                                    class="nav-link flex items-center h-14 w-full justify-between
-                                    group-hover:text-primary
+                                    transition-all duration-200 ease-in-out delay-200
+                                    md:group-hover:text-primary
                                     before:empty-content before:z-10 before:pointer-events-none before:absolute before:opacity-0 before:top-0
                                     before:left-0 before:right-0 before:bottom-0 before:w-full before:h-full before:bg-white
+                                    before:transition-all before:duration-200 before:ease-in-out before:delay-200
                                     after:block after:fixed after:empty-content after:pointer-events-none after:opacity-0 after:top-0
                                     after:left-0 after:right-0 after:bottom-0 after:w-full after:h-full after:bg-opacity-5 after:bg-black-trans
-                                    "
+                                    after:transition-all after:duration-200 after:ease-in-out after:delay-200"
                                    @click="toggleSlideNav($el)">
                                     <span class="z-30">Categorieën</span>
                                     <svg class="fill-current w-6 h-6 z-30
@@ -695,9 +698,10 @@
                                     </svg>
                                 </a>
                                 <div class="nav-constrain block w-full max-h-0 overflow-hidden absolute top-0 left-full bg-white
-                                opacity-0 z-10 transition-all duration-300 delay-200 ease-in
+                                opacity-0 z-10 transition-all duration-300 ease-in
                                 md:pointer-events-auto md:left-0 md:top-14 md:border-b md:border-t md:border-solid md:border-gray-300 md:invisible
-                                group-hover:max-h-infinite group-hover:visible group-hover:opacity-100 group-hover:visible">
+                                md:group-hover:max-h-infinite md:group-hover:visible md:group-hover:opacity-100 md:group-hover:visible
+                                md:group-hover:transition-all md:group-hover:delay-300 md:group-hover:duration-300 md:group-hover:ease-in-out">
                                     <div class="container text-xs md:flex md:py-4">
                                         <div class="back-container w-full h-16 md:hidden">
                                             <a href="#"
@@ -1036,16 +1040,17 @@
                                 </div>
                             </li>
                             <li class="nav-container has-child flex items-center h-14 border-b border-solid border-gray-300
-                                md:border-b-0 md:pr-8
-                                group">
+                                md:border-b-0 md:pr-8 group">
                                 <a href="#"
                                    class="nav-link flex items-center h-14 w-full justify-between
-                                   group-hover:text-primary
+                                   transition-all duration-200 ease-in-out delay-200
+                                   md:group-hover:text-primary
                                     before:empty-content before:z-10 before:pointer-events-none before:absolute before:opacity-0 before:top-0
                                     before:left-0 before:right-0 before:bottom-0 before:w-full before:h-full before:bg-white
+                                    before:transition-all before:duration-200 before:ease-in-out before:delay-200
                                     after:block after:fixed after:empty-content after:pointer-events-none after:opacity-0 after:top-0
                                     after:left-0 after:right-0 after:bottom-0 after:w-full after:h-full after:bg-opacity-5 after:bg-black-trans
-                                    "
+                                    after:transition-all after:duration-200 after:ease-in-out after:delay-200"
                                    @click="toggleSlideNav($el)">
                                     <span class="z-30">Collecties</span>
                                     <svg class="fill-current w-6 h-6 z-30
@@ -1056,9 +1061,10 @@
                                     </svg>
                                 </a>
                                 <div class="nav-constrain block w-full max-h-0 overflow-hidden absolute top-0 left-full bg-white
-                                opacity-0 z-10 transition-all duration-300 delay-200 ease-in
+                                opacity-0 z-10 transition-all duration-300 ease-in
                                 md:pointer-events-auto md:left-0 md:top-14 md:border-b md:border-t md:border-solid md:border-gray-300 md:invisible
-                                group-hover:max-h-infinite group-hover:visible group-hover:opacity-100 group-hover:visible">
+                                md:group-hover:max-h-infinite md:group-hover:visible md:group-hover:opacity-100 md:group-hover:visible
+                                md:group-hover:transition-all md:group-hover:delay-300 md:group-hover:duration-300 md:group-hover:ease-in-out">
                                     <div class="container text-xs md:flex md:py-4">
                                         <div class="back-container w-full h-16 md:hidden">
                                             <a href="#"
@@ -1508,8 +1514,10 @@
                         <ul class="secondary-nav flex flex-col justify-start text-xs
                             md:flex-row  md:justify-end md:flex-shrink">
                             <li class="nav-container flex items-center h-14 border-b border-solid border-gray-300
-                                    md:border-b-0 md:mr-8">
-                                <a href="#" class="nav-link flex items-center h-14 w-full justify-start">
+                                    md:border-b-0 md:mr-8 group">
+                                <a href="#" class="nav-link flex items-center h-14 w-full justify-start
+                                            transition-all duration-200 ease-in-out delay-200
+                                            md:group-hover:text-primary">
                                     <svg class="md:hidden" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24"
                                          width="24px" fill="#000000">
                                         <path d="M0 0h24v24H0V0z" fill="none"/>
@@ -1520,8 +1528,10 @@
                                 </a>
                             </li>
                             <li class="nav-container flex items-center h-14 border-b border-solid border-gray-300
-                                    md:border-b-0 md:mr-8">
-                                <a href="#" class="nav-link flex items-center h-14 w-full justify-start">
+                                    md:border-b-0 md:mr-8 group">
+                                <a href="#" class="nav-link flex items-center h-14 w-full justify-start
+                                            transition-all duration-200 ease-in-out delay-200
+                                            md:group-hover:text-primary">
                                     <svg class="md:hidden" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24"
                                          width="24px" fill="#000000">
                                         <path d="M0 0h24v24H0V0z" fill="none"/>
@@ -1532,8 +1542,10 @@
                                 </a>
                             </li>
                             <li class="nav-container flex items-center h-14 border-b border-solid border-gray-300
-                                    md:border-b-0 md:mr-8">
-                                <a href="#" class="nav-link flex items-center h-14 w-full justify-start">
+                                    md:border-b-0 md:mr-8 group">
+                                <a href="#" class="nav-link flex items-center h-14 w-full justify-start
+                                                transition-all duration-200 ease-in-out delay-200
+                                                md:group-hover:text-primary">
                                     <svg class="md:hidden" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24"
                                          width="24px" fill="#000000">
                                         <path d="M0 0h24v24H0V0z" fill="none"/>

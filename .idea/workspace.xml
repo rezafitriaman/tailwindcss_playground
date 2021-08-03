@@ -5,6 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/scss/components/main-menu.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/scss/components/main-menu.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/tailwind.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,7 +144,8 @@
       <workItem from="1627509995380" duration="1023000" />
       <workItem from="1627541655200" duration="21185000" />
       <workItem from="1627627267330" duration="654000" />
-      <workItem from="1627892493436" duration="24978000" />
+      <workItem from="1627892493436" duration="25044000" />
+      <workItem from="1627973455327" duration="10101000" />
     </task>
     <servers />
   </component>

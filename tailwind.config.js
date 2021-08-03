@@ -69,6 +69,8 @@ module.exports = {
     extend: {
       maxHeight: ['group-hover', 'hover'],
       visibility: ['group-hover', 'hover'],
+      transitionDelay: ['group-hover', 'hover'],
+      opacity: ['group-hover', 'hover', 'active'],
     }
   },
   plugins: [
@@ -92,14 +94,23 @@ module.exports = {
         ".delay-75": {
           "transition-delay": "75ms"
         },
+        ".delay-200": {
+          "transition-delay": "200ms"
+        },
         ".delay-300": {
           "transition-delay": "300ms"
         },
         ".duration-75": {
           "transition-duration": "75ms"
         },
+        ".duration-200": {
+          "transition-duration": "200ms"
+        },
         ".duration-300": {
           "transition-duration": "300ms"
+        },
+        ".ease-in-out": {
+          "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
         },
         ".z-10": {
           zIndex: "10",
@@ -117,7 +128,7 @@ module.exports = {
           opacity: 0
         },
         ".opacity-100": {
-          opacity: 100
+          opacity: 1
         },
         ".top-0": {
           top: "0px"
@@ -152,10 +163,10 @@ module.exports = {
         ".bg-black-trans": {
         "--tw-bg-opacity": "0.3",
         "background-color": "rgba(0, 0, 0, var(--tw-bg-opacity))"
-        }
+        },
       }
       addUtilities(newUtilities, {
-        variants: ["before", "after"],
+        variants: ["before", "after", "group-hover"],
       });
     }),
     plugin(function({ addBase, theme }) {

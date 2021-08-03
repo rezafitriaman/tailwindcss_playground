@@ -10,7 +10,6 @@
     }
 
     .main-menu {
-        /*has a delay for 300s*/
         &.visible {
             @apply flex;
         }
